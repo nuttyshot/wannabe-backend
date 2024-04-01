@@ -1,4 +1,4 @@
-# 👚 IDOL CLOSET BACKEND 👖
+# 👚 WANNABE 👖
 
 ## 요구사항
 
