@@ -14,6 +14,9 @@ public record OAuth2ProviderValues(
       String provider,
       String clientId,
       String redirectUri,
+      String tokenGrantType,
+      String authorizationResponseType,
+      String clientSecret,
       List<String> scope
   ) {
 
@@ -21,7 +24,8 @@ public record OAuth2ProviderValues(
 
   @Builder
   public record Provider(
-      String authorizationUri
+      String authorizationUri,
+      String tokenUri
   ) {
 
   }

@@ -26,8 +26,9 @@ public class OAuth2Controller {
   private String redirectUri(@NonNull String registrationId) {
     try {
       val argumentPort = chooser.choose(registrationId);
-      return String.format("%s?response_type=code&client_id=%s&state=%s&redirect_uri=%s&scope=%s",
+      return String.format("%s?response_type=%s&client_id=%s&state=%s&redirect_uri=%s&scope=%s",
           argumentPort.client().provider().authorizationUri(),
+          argumentPort.client().registration().authorizationResponseType(),
           argumentPort.client().registration().clientId(),
           state(registrationId),
           argumentPort.client().registration().redirectUri(),
