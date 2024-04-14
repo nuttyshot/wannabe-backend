@@ -2,6 +2,21 @@ spring:
   security:
     oauth2:
       client:
+        registration:
+          kakao:
+            provider: kakao
+            client-id: "17e562df562af0446691a84a7846c65f"
+            redirect-uri: http://localhost:8080/oauth2
+            scope: >
+              account_email,
+              birthyear,
+              profile_nickname,
+              name,
+              age_range,
+              birthday,
+              phone_number
+              
+
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
