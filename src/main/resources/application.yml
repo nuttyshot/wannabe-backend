@@ -6,7 +6,7 @@ spring:
           kakao:
             provider: kakao
             client-id: "17e562df562af0446691a84a7846c65f"
-            redirect-uri: http://localhost:8080/oauth2
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             scope: >
               account_email,
               birthyear,
