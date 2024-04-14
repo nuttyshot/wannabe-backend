@@ -29,12 +29,16 @@ public class OAuth2Controller {
       return String.format("%s?response_type=code&client_id=%s&state=%s&redirect_uri=%s&scope=%s",
           argumentPort.client().provider().authorizationUri(),
           argumentPort.client().registration().clientId(),
-          UUID.randomUUID(),
+          state(registrationId),
           argumentPort.client().registration().redirectUri(),
           argumentPort.client().registration().scope().stream().reduce((a, b) -> a + "," + b).get()
       );
     } catch (OperationNotSupportedException e) {
-      throw new IllegalStateException(e);
+      throw new IllegalArgumentException(e);
     }
+  }
+
+  private String state(@NonNull String registrationId) {
+    return String.format("%s,%s", registrationId, UUID.randomUUID());
   }
 }
