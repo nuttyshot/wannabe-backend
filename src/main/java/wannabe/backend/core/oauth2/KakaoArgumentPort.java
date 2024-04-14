@@ -36,6 +36,9 @@ public class KakaoArgumentPort implements OAuth2ArgumentPort {
   @Value("${spring.security.oauth2.client.provider.kakao.token-uri}")
   private String tokenUri;
 
+  @Value("${spring.security.oauth2.client.provider.kakao.user-info-uri}")
+  private String userInfoUri;
+
   @Override
   public OAuth2ProviderValues client() {
     return OAuth2ProviderValues.builder()
@@ -51,6 +54,7 @@ public class KakaoArgumentPort implements OAuth2ArgumentPort {
         .provider(Provider.builder()
             .authorizationUri(authorizationUri)
             .tokenUri(tokenUri)
+            .userInfoUri(userInfoUri)
             .build())
         .build();
   }

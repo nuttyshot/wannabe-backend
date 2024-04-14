@@ -25,7 +25,8 @@ public record OAuth2ProviderValues(
   @Builder
   public record Provider(
       String authorizationUri,
-      String tokenUri
+      String tokenUri,
+      String userInfoUri
   ) {
 
   }

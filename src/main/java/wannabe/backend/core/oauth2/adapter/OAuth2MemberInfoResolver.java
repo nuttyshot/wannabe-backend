@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import javax.naming.OperationNotSupportedException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +12,13 @@ import lombok.val;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Request.Builder;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import wannabe.backend.core.oauth2.OAuth2ArgumentChooserService;
 import wannabe.backend.core.oauth2.OAuth2ArgumentPort;
+import wannabe.backend.core.oauth2.port.OAuth2ErrorPort;
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +27,35 @@ public class OAuth2MemberInfoResolver implements OAuth2MemberInfoGateway {
   private final OAuth2ArgumentChooserService chooser;
   private final OkHttpClient httpClient;
   private final ObjectMapper objectMapper;
+  private final OAuth2ErrorPort errorPort;
+  private final OAuth2MemberFactory oAuth2MemberFactory;
 
   @Override
   public OAuth2Member resolve(@NonNull OAuth2Request request) {
-    return null;
+    val accessToken = accessToken(request.registrationId(), request.code(), request.state());
+
+    val argumentPort = argumentPort(request.registrationId());
+
+    val httpRequest = new Builder()
+        .url(argumentPort.client().provider().userInfoUri())
+        .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+        .build();
+
+    try (val res = httpClient.newCall(httpRequest).execute()) {
+      if (res.body() == null) {
+        throw new IllegalCallerException("kakao 토큰 응답이 잘못되었습니다 : " + res);
+      }
+
+      val bodyString = res.body().byteString().string(StandardCharsets.UTF_8);
+      val resBody = objectMapper.readValue(bodyString,
+          new TypeReference<Map<String, Object>>() {});
+
+      errorPort.receive(request.registrationId(), res.code(), resBody);
+
+      return oAuth2MemberFactory.create(request.registrationId(), resBody);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**

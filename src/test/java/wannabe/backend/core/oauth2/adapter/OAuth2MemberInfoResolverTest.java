@@ -18,6 +18,7 @@ import wannabe.backend.core.oauth2.OAuth2ArgumentPort;
 import wannabe.backend.core.oauth2.OAuth2ProviderValues;
 import wannabe.backend.core.oauth2.OAuth2ProviderValues.Provider;
 import wannabe.backend.core.oauth2.OAuth2ProviderValues.Registration;
+import wannabe.backend.core.oauth2.port.OAuth2ErrorPort;
 
 /**
  * 아래 링크를 통해 code를 얻고 테스트를 실행해야 합니다. <p>
@@ -31,8 +32,10 @@ class OAuth2MemberInfoResolverTest {
   private final OAuth2ArgumentChooserService chooser = mock(OAuth2ArgumentChooserService.class);
   private final OkHttpClient client = new OkHttpClient();
   private final ObjectMapper mapper = new ObjectMapper();
+  private final OAuth2ErrorPort errorPort = mock(OAuth2ErrorPort.class);
+  private final OAuth2MemberFactory oAuth2MemberFactory = new OAuth2MemberFactory();
   private final OAuth2MemberInfoResolver resolver
-      = new OAuth2MemberInfoResolver(chooser, client, mapper);
+      = new OAuth2MemberInfoResolver(chooser, client, mapper, errorPort, oAuth2MemberFactory);
 
   // http://localhost:8080/login/oauth2/code/kakao?code=lPzBGFRzgRyAS36oPVOHSnUeXoD-0sQ2wsG_hgXGveJz4NOcYQnXAFcJNpIKPXLqAAABjt2iKRiGtS2__sNdBQ&state=kakao,8e493eda-c2c8-4d73-b3fa-af6f505d5eed
 

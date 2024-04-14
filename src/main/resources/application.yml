@@ -24,6 +24,7 @@ spring:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
             token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
 
 jwt:
   secret: 236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041493123432423412312312312sidjsa90dias0f9asi0d9iasd09asid09asidas9dia0s9di0as9i0
