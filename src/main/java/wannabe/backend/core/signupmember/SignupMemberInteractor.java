@@ -10,6 +10,7 @@ import wannabe.backend.core.oauth2.adapter.OAuth2Member;
 public class SignupMemberInteractor implements SignupMemberPort {
 
   @Override
-  public void signup(@NonNull OAuth2Member oAuth2Member) {
+  public long signup(@NonNull OAuth2Member oAuth2Member) {
+    return 0L;
   }
 }

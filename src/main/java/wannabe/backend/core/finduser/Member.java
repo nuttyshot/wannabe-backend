@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "member")
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Member extends Audit {
 
+  @Getter
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)

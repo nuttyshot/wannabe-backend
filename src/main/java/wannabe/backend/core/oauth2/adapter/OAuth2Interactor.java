@@ -4,10 +4,11 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.view.RedirectView;
 import wannabe.backend.core.finduser.FindMemberPort;
 import wannabe.backend.core.oauth2.OAuth2Presenter;
 import wannabe.backend.core.signupmember.SignupMemberPort;
+import wannabe.backend.core.token.TokenInformation;
+import wannabe.backend.core.token.TokenPort;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,8 @@ public class OAuth2Interactor implements OAuth2Adapter {
   private final OAuth2MemberInfoGateway oAuth2MemberInfoGateway;
   private final FindMemberPort findMemberPort;
   private final SignupMemberPort signupMemberPort;
+  private final OAuth2Presenter presenter;
+  private final TokenPort tokenPort;
 
   @Override
   public OAuth2Response success(@NonNull OAuth2Request request) {
@@ -25,15 +28,20 @@ public class OAuth2Interactor implements OAuth2Adapter {
     if (member.isEmpty()) {
       return signup(oAuth2Member);
     }
-    return joined();
+    return joined(member.get().getId());
   }
 
   private OAuth2Response signup(@NonNull OAuth2Member oAuth2Member) {
-    signupMemberPort.signup(oAuth2Member);
-    return null;
+    val id = signupMemberPort.signup(oAuth2Member);
+    return mainPage(id);
   }
 
-  private OAuth2Response joined() {
-    return null;
+  private OAuth2Response joined(long id) {
+    return mainPage(id);
+  }
+
+  private OAuth2Response mainPage(long id) {
+    val loginToken = tokenPort.loginToken(new TokenInformation(id));
+    return presenter.mainPage(loginToken.accessToken(), loginToken.refreshToken(), loginToken.expiredAt());
   }
 }

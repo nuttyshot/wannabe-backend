@@ -10,7 +10,6 @@ public record OAuth2Member(@NonNull String email,
                            String name,
                            String ageRange,
                            String birthday,
-                           String phoneNo,
-                           @NonNull String provider) {
+                           String phoneNo) {
 
 }
