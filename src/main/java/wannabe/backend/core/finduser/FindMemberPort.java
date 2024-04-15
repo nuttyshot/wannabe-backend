@@ -1,8 +1,9 @@
 package wannabe.backend.core.finduser;
 
+import java.util.Optional;
 import lombok.NonNull;
 
 public interface FindMemberPort {
 
-  Member findByEmail(@NonNull String email);
+  Optional<Member> findByEmail(@NonNull String email);
 }

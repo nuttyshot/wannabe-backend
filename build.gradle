@@ -45,6 +45,10 @@ dependencies {
 	implementation("com.squareup.okhttp3:okhttp")
 	implementation("com.squareup.okhttp3:logging-interceptor")
 	testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+
+	// Database
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {

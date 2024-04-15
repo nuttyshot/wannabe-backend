@@ -17,14 +17,15 @@ public class OAuth2Interactor implements OAuth2Adapter {
   @Override
   public OAuth2Response success(@NonNull OAuth2Request request) {
     val oAuth2Member = oAuth2MemberInfoGateway.resolve(request);
+    val member = findMemberPort.findByEmail(oAuth2Member.email());
 
-    return switch (oAuth2Member.joiningStatus()) {
-      case SIGNED_UP -> joined();
-      case POSSIBLE_TO_SIGNUP -> joining();
-    };
+    if (member.isEmpty()) {
+      return possibleToSignup();
+    }
+    return joined();
   }
 
-  private OAuth2Response joining() {
+  private OAuth2Response possibleToSignup() {
     return null;
   }
 

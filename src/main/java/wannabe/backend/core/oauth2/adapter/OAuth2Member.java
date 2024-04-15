@@ -11,7 +11,6 @@ public record OAuth2Member(@NonNull String email,
                            String ageRange,
                            String birthday,
                            String phoneNo,
-                           JoiningStatus joiningStatus,
                            @NonNull String provider) {
 
 }
