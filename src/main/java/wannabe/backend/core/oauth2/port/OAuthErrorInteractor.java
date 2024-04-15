@@ -17,7 +17,7 @@ public class OAuthErrorInteractor implements OAuth2ErrorPort {
       return;
     }
 
-    log.error("OAuth2 로그인 후 사용자 정보 가져오는 과정에 에러 발생 registrationId : %s, body : %s".formatted(
+    log.error("OAuth2 로그인 후 사용자 정보 가져오는 과정에 에러 발생 provider : %s, body : %s".formatted(
         registrationId, resBody));
 
     switch (registrationId) {
