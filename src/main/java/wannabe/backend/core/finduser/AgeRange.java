@@ -1,5 +1,7 @@
 package wannabe.backend.core.finduser;
 
+import lombok.NonNull;
+
 public enum AgeRange {
   AGE_1_9("1세 이상 10세 미만"),
   AGE_10_14("10세 이상 15세 미만"),
@@ -17,5 +19,26 @@ public enum AgeRange {
 
   AgeRange(String description) {
     this.description = description;
+  }
+
+  public static AgeRange fromString(String ageRange) {
+    if (ageRange == null) {
+      return null;
+    }
+
+    return switch (ageRange) {
+      case "1~9" -> AGE_1_9;
+      case "10~14" -> AGE_10_14;
+      case "15~19" -> AGE_15_19;
+      case "20~29" -> AGE_20_29;
+      case "30~39" -> AGE_30_39;
+      case "40~49" -> AGE_40_49;
+      case "50~59" -> AGE_50_59;
+      case "60~69" -> AGE_60_69;
+      case "70~79" -> AGE_70_79;
+      case "80~89" -> AGE_80_89;
+      case "90~" -> AGE_90;
+      default -> throw new IllegalArgumentException("유효하지 않은 연령대입니다 : " + ageRange);
+    };
   }
 }

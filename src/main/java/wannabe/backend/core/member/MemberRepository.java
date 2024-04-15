@@ -1,4 +1,4 @@
-package wannabe.backend.core.finduser;
+package wannabe.backend.core.member;
 
 import java.util.Optional;
 import lombok.NonNull;

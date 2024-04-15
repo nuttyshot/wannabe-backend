@@ -1,4 +1,4 @@
-package wannabe.backend.core.finduser;
+package wannabe.backend.core.member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,10 +14,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import wannabe.backend.core.finduser.AgeRange;
+import wannabe.backend.core.finduser.Audit;
 
 @Table(name = "member")
-@Builder
-@AllArgsConstructor
+@Builder(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member extends Audit {
@@ -31,6 +33,7 @@ public class Member extends Audit {
   @Column(name = "email", length = 255, nullable = false)
   private String email;
 
+  @Getter
   @Column(name = "birthday")
   private LocalDate birthday;
 
@@ -40,6 +43,7 @@ public class Member extends Audit {
   @Column(name = "name", length = 50)
   private String name;
 
+  @Getter
   @Enumerated(EnumType.STRING)
   @Column(name = "age_range", length = 10)
   private AgeRange ageRange;

@@ -1,14 +1,14 @@
 package wannabe.backend.core.finduser;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lombok.val;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import wannabe.backend.core.member.FakeMemberFactory;
+import wannabe.backend.core.member.MemberRepository;
 
 @DataJpaTest
 class FindMemberInteractorTest {
@@ -26,7 +26,7 @@ class FindMemberInteractorTest {
   @Test
   void 이메일로_회원_찾기() {
     // given
-    val member = Member.builder().email("MOCK_EMAIL").build();
+    val member = FakeMemberFactory.create("MOCK_EMAIL");
     memberRepository.save(member);
     // when
     val findMember = interactor.findByEmail("MOCK_EMAIL").get();
