@@ -8,6 +8,6 @@ public class SystemDateTimeProvider implements DateTimeProvider {
 
   @Override
   public long nowTimestamp() {
-    return Instant.now().getEpochSecond();
+    return Instant.now().toEpochMilli();
   }
 }

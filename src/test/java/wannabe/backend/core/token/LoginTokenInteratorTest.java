@@ -2,7 +2,7 @@ package wannabe.backend.core.token;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.only;
@@ -43,8 +43,8 @@ class LoginTokenInteratorTest {
 
     when(dateTimeProvider.nowTimestamp()).thenReturn(NOW);
     when(apiUrlArgumentGateway.getApiUrl()).thenReturn(API_URL);
-    when(accessTokenPort.getAccessToken(any(), anyString(), anyString(), anyInt())).thenReturn(
-        "MOCK_ACCESS_TOKEN");
+    when(accessTokenPort.getAccessToken(any(), anyString(), anyString(), anyLong(),
+        anyLong())).thenReturn("MOCK_ACCESS_TOKEN");
     when(refreshTokenPort.getRefreshToken(any(), anyString())).thenReturn("MOCK_REFRESH_TOKEN");
     // when
     val loginToken = interator.getLoginToken(new TokenInformation(1L));
@@ -54,7 +54,7 @@ class LoginTokenInteratorTest {
     verify(dateTimeProvider, only()).nowTimestamp();
     verify(apiUrlArgumentGateway, only()).getApiUrl();
     verify(accessTokenPort, only()).getAccessToken(any(), eq(API_URL + "/auth/login"), anyString(),
-        eq(10 * 60 * 1000));
+        eq(10 * 60 * 1000L), eq(NOW));
     verify(refreshTokenPort, only()).getRefreshToken(any(), eq(API_URL + "/auth/login"));
   }
 }
