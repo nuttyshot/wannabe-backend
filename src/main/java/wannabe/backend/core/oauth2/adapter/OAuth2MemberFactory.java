@@ -21,15 +21,19 @@ public class OAuth2MemberFactory {
 
     // kakao 에서 오는 kakao_account은 Map<String, Object> 형태이다.
     @SuppressWarnings("unchecked")
-    val kakaoAccount = (Map<String, Object>) resBody.get("kakao_account");
+    val kakaoAccount = (Map<String, Object>) resBody.getOrDefault("kakao_account", Map.of());
 
-    val email = kakaoAccount.getOrDefault("email", "").toString();
-    val birthyear = kakaoAccount.getOrDefault("birthyear", "").toString();
-    val nickname = kakaoAccount.getOrDefault("nickname", "").toString();
-    val name = kakaoAccount.getOrDefault("name", "").toString();
-    val ageRange = kakaoAccount.getOrDefault("age_range", "").toString();
-    val birthday = kakaoAccount.getOrDefault("birthday", "").toString();
-    val phoneNo = kakaoAccount.getOrDefault("phone_number", "").toString();
+    // profile은 Map<String, Object> 형태이다.
+    @SuppressWarnings("unchecked")
+    val profile = (Map<String, Object>) kakaoAccount.getOrDefault("profile", Map.of());
+
+    val email = (String) kakaoAccount.getOrDefault("email", null);
+    val birthyear = (String) kakaoAccount.getOrDefault("birthyear", null);
+    val nickname = (String) profile.getOrDefault("nickname", null);
+    val name = (String) kakaoAccount.getOrDefault("name", null);
+    val ageRange = (String) kakaoAccount.getOrDefault("age_range", null);
+    val birthday = (String) kakaoAccount.getOrDefault("birthday", null);
+    val phoneNo = (String) kakaoAccount.getOrDefault("phone_number", null);
 
     return OAuth2Member.builder()
         .email(email)

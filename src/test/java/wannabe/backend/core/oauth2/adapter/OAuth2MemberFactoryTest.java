@@ -19,11 +19,14 @@ class OAuth2MemberFactoryTest {
   void 카카오일때_provider_email_birthyear이_반환되어야한다() {
     // given
     val oauth2Response = Map.of("kakao_account",
-        (Object) Map.of("email", "MOCK_EMAIL", "birthyear", "MOCK_BIRTHYEAR"));
+        (Object) Map.of("email", "MOCK_EMAIL",
+            "birthyear", "MOCK_BIRTHYEAR",
+            "profile", Map.of("nickname", "MOCK_NICKNAME")));
     // when
     val oAuth2Member = factory.create("kakao", oauth2Response);
     // then
     assertThat(oAuth2Member.email()).isEqualTo("MOCK_EMAIL");
     assertThat(oAuth2Member.birthyear()).isEqualTo("MOCK_BIRTHYEAR");
+    assertThat(oAuth2Member.nickname()).isEqualTo("MOCK_NICKNAME");
   }
 }
