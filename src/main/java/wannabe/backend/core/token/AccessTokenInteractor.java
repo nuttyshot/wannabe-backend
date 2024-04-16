@@ -6,6 +6,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.util.Collections;
 import java.util.Date;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +24,15 @@ public class AccessTokenInteractor implements AccessTokenPort {
 
   private final JwtSecurityArgumentGateway jwtSecurityArgumentGateway;
   private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
+  private final DateTimeProvider dateTimeProvider;
 
   @Override
-  public String getAccessToken(@NonNull TokenInformation tokenInformation, @NonNull String issuer,
-      @NonNull String uuid, long expirationTime, long now) {
-
+  public String getAccessToken(@NonNull TokenInformation tokenInformation, @NonNull String issuer) {
     val key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecurityArgumentGateway.jwtSecret()));
+
+    val now = dateTimeProvider.nowTimestamp();
+    val uuid = UUID.randomUUID().toString();
+    val ACCESS_TOKEN_EXPIRATION_TIME = 1000L * 60 * 10; // 10분
 
     // MEMBER ID를 기반으로 Authentication 객체 생성
     val authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -49,7 +52,7 @@ public class AccessTokenInteractor implements AccessTokenPort {
         .setIssuer(issuer)
         .setIssuedAt(new Date(now))
         .setNotBefore(new Date(now))
-        .setExpiration(new Date(now + expirationTime))
+        .setExpiration(new Date(now + ACCESS_TOKEN_EXPIRATION_TIME))
         .setId(uuid)
         .compact();
   }

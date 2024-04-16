@@ -19,11 +19,9 @@ public class LoginTokenInterator implements LoginTokenPort {
   public LoginToken getLoginToken(@NonNull TokenInformation tokenInformation) {
     val now = dateTimeProvider.nowTimestamp();
     val accessTokenExpirationTime = 10 * 60 * 1000L; // 10분
-    val uuid = UUID.randomUUID().toString();
     val issuer = apiUrlArgumentGateway.getApiUrl() + "/auth/login";
 
-    val accessToken = accessTokenPort.getAccessToken(tokenInformation, issuer, uuid,
-        accessTokenExpirationTime, now);
+    val accessToken = accessTokenPort.getAccessToken(tokenInformation, issuer);
     val refreshToken = refreshTokenPort.getRefreshToken(tokenInformation, issuer);
 
     return LoginToken.builder()

@@ -4,6 +4,5 @@ import lombok.NonNull;
 
 public interface AccessTokenPort {
 
-  String getAccessToken(@NonNull TokenInformation tokenInformation, @NonNull String issuer,
-      @NonNull String uuid, long expirationTime, long now);
+  String getAccessToken(@NonNull TokenInformation tokenInformation, @NonNull String issuer);
 }

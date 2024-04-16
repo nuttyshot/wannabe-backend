@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import io.jsonwebtoken.Jwts;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -34,9 +35,14 @@ class AccessTokenInteractorTest {
   @Mock
   private AuthenticationManagerBuilder authenticationManagerBuilder;
 
+  @Mock
+  private DateTimeProvider dateTimeProvider;
+
   @Test
   void 액세스_토큰을_생성한다() {
     // given
+    val NOW = Instant.now().toEpochMilli();
+    when(dateTimeProvider.nowTimestamp()).thenReturn(NOW);
     val KEY = over256Bit();
     // Keys.hmacShaKeyFor 에서 256 비트 이상 넘겨야함
     when(jwtSecurityArgumentGateway.jwtSecret()).thenReturn(KEY);
@@ -44,9 +50,7 @@ class AccessTokenInteractorTest {
     when(authenticationManagerBuilder.getObject()).thenReturn(authenticationManager);
     when(authenticationManager.authenticate(any())).thenReturn(mock(Authentication.class));
     // when
-    val accessToken = interactor.getAccessToken(new TokenInformation(1L), "MOCK_ISSUER",
-        "MOCK_UUID", 1000L, Instant.now().toEpochMilli());
-
+    val accessToken = interactor.getAccessToken(new TokenInformation(1L), "MOCK_ISSUER");
     // then
     val parseToken = Jwts.parserBuilder()
         .setSigningKey(KEY)
@@ -54,6 +58,17 @@ class AccessTokenInteractorTest {
         .parseClaimsJws(accessToken)
         .getBody();
     assertThat(parseToken.get(TokenKey.MEMBER_ID_KEY.getValue())).isEqualTo(1);
+
+    val ACCESS_TOKEN_EXPIRATION_TIME = 1000L * 60 * 10;
+    val expirationToLocalDateTime = parseToken.getExpiration().toInstant().atZone(ZoneId.systemDefault())
+        .toLocalDateTime().withNano(0);
+
+    // 초 단위까지 같다.
+    assertThat(expirationToLocalDateTime).isEqualTo(Instant.ofEpochMilli(NOW + ACCESS_TOKEN_EXPIRATION_TIME).atZone(ZoneId.systemDefault())
+        .toLocalDateTime().withNano(0));
+    assertThat(parseToken.getSubject()).isNotNull();
+    assertThat(parseToken.getIssuer()).isNotNull();
+    assertThat(parseToken.getId()).isNotNull();
   }
 
   private String over256Bit() {
