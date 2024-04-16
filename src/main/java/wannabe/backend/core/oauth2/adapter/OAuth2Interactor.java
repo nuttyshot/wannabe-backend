@@ -8,7 +8,7 @@ import wannabe.backend.core.finduser.FindMemberPort;
 import wannabe.backend.core.oauth2.OAuth2Presenter;
 import wannabe.backend.core.signupmember.SignupMemberPort;
 import wannabe.backend.core.token.TokenInformation;
-import wannabe.backend.core.token.TokenPort;
+import wannabe.backend.core.token.LoginTokenPort;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +18,7 @@ public class OAuth2Interactor implements OAuth2Adapter {
   private final FindMemberPort findMemberPort;
   private final SignupMemberPort signupMemberPort;
   private final OAuth2Presenter presenter;
-  private final TokenPort tokenPort;
+  private final LoginTokenPort loginTokenPort;
 
   @Override
   public OAuth2Response success(@NonNull OAuth2Request request) {
@@ -41,7 +41,7 @@ public class OAuth2Interactor implements OAuth2Adapter {
   }
 
   private OAuth2Response mainPage(long id) {
-    val loginToken = tokenPort.loginToken(new TokenInformation(id));
+    val loginToken = loginTokenPort.getLoginToken(new TokenInformation(id));
     return presenter.mainPage(loginToken.accessToken(), loginToken.refreshToken(), loginToken.expiredAt());
   }
 }

@@ -16,8 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.core.finduser.FindMemberPort;
 import wannabe.backend.core.oauth2.OAuth2Presenter;
 import wannabe.backend.core.signupmember.SignupMemberPort;
-import wannabe.backend.core.token.LoginToken;
-import wannabe.backend.core.token.TokenPort;
+import wannabe.backend.core.token.FakeLoginTokenFactory;
+import wannabe.backend.core.token.LoginTokenPort;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2InteractorTest {
@@ -38,21 +38,21 @@ class OAuth2InteractorTest {
   private OAuth2Presenter presenter;
 
   @Mock
-  private TokenPort tokenPort;
+  private LoginTokenPort loginTokenPort;
 
   @Test
   void 가입한_유저가_아닐경우_가입시키고_페이지로_이동해야한다() {
     // given
     when(oAuth2MemberInfoGateway.resolve(any())).thenReturn(FakeOAuth2MemberFactory.nonMember());
     when(findMemberPort.findByEmail(anyString())).thenReturn(Optional.empty());
-    when(tokenPort.loginToken(any())).thenReturn(FakeLoginTokenFactory.create());
+    when(loginTokenPort.getLoginToken(any())).thenReturn(FakeLoginTokenFactory.create());
     // when
     interactor.success(FakeOAuth2RequestFactory.create());
     // then
     verify(oAuth2MemberInfoGateway, only()).resolve(any());
     verify(findMemberPort, only()).findByEmail(anyString());
     verify(signupMemberPort, only()).signup(any());
-    verify(tokenPort, only()).loginToken(any());
+    verify(loginTokenPort, only()).getLoginToken(any());
     verify(presenter, only()).mainPage(anyString(), anyString(), anyLong());
   }
 
@@ -75,14 +75,6 @@ class OAuth2InteractorTest {
 
     private static OAuth2Member nonMember() {
       return OAuth2Member.builder().email("MOCK_EMAIL").birthyear("MOCK_BIRTHYEAR").build();
-    }
-  }
-
-  private static class FakeLoginTokenFactory {
-
-    private static LoginToken create() {
-      return LoginToken.builder().accessToken("MOCK_ACCESS_TOKEN")
-          .refreshToken("MOCK_REFRESH_TOKEN").expiredAt(0L).build();
     }
   }
 }
