@@ -25,7 +25,6 @@ public class OAuth2CallbackController {
    */
   @GetMapping
   public void success(
-      @PathVariable(value = "providerId") Provider providerId,
       @RequestParam(value = "code") String code,
       @RequestParam(value = "state") String state,
       HttpServletResponse response) throws IOException {
