@@ -18,17 +18,26 @@ public class NaverArgumentPort implements OAuth2ArgumentPort {
   @Value("${spring.security.oauth2.client.registration.naver.redirect-uri}")
   private String redirectUri;
 
+  @Value("${spring.security.oauth2.client.registration.naver.token-grant-type}")
+  private String tokenGrantType;
+
   @Value("${spring.security.oauth2.client.registration.naver.authorization-response-type}")
   private String authorizationResponseType;
 
   @Value("${spring.security.oauth2.client.registration.naver.client-secret}")
   private String clientSecret;
 
+  @Value("${spring.security.oauth2.client.registration.naver.scope}")
+  private String[] scope;
+
   @Value("${spring.security.oauth2.client.provider.naver.authorization-uri}")
   private String authorizationUri;
 
-  @Value("${spring.security.oauth2.client.registration.naver.scope}")
-  private String[] scope;
+  @Value("${spring.security.oauth2.client.provider.naver.token-uri}")
+  private String tokenUri;
+
+  @Value("${spring.security.oauth2.client.provider.naver.user-info-uri}")
+  private String userInfoUri;
 
   @Override
   public OAuth2ProviderValues client() {
@@ -37,12 +46,15 @@ public class NaverArgumentPort implements OAuth2ArgumentPort {
             .provider(provider)
             .clientId(clientId)
             .redirectUri(redirectUri)
+            .tokenGrantType(tokenGrantType)
             .authorizationResponseType(authorizationResponseType)
             .clientSecret(clientSecret)
             .scope(Arrays.stream(scope).toList())
             .build())
         .provider(Provider.builder()
             .authorizationUri(authorizationUri)
+            .tokenUri(tokenUri)
+            .userInfoUri(userInfoUri)
             .build())
         .build();
   }

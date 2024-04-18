@@ -88,7 +88,7 @@ public class OAuth2MemberInfoResolver implements OAuth2MemberInfoGateway {
 
     try (val res = httpClient.newCall(request).execute()) {
       if (res.body() == null) {
-        throw new IllegalCallerException("kakao 토큰 응답이 잘못되었습니다 : " + res);
+        throw new IllegalCallerException(registrationId + " 토큰 응답이 잘못되었습니다 : " + res);
       }
 
       val bodyString = res.body().byteString().string(StandardCharsets.UTF_8);

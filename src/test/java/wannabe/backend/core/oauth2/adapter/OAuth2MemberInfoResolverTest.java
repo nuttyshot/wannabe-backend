@@ -25,7 +25,6 @@ import wannabe.backend.core.oauth2.port.OAuth2ErrorPort;
  * code는 일회성 이기 때문에 테스트할 때마다 재발급 받으셔야 합니다. <p>
  * <a href="http://localhost:8080/oauth2/authorization/kakao">kakao</a>
  */
-@Disabled("code를 kakao로 부터 얻어서 사용하세요!")
 @ExtendWith(MockitoExtension.class)
 class OAuth2MemberInfoResolverTest {
 
@@ -49,18 +48,39 @@ class OAuth2MemberInfoResolverTest {
     // given
     val argumentPort = mock(OAuth2ArgumentPort.class);
     when(chooser.choose(anyString())).thenReturn(argumentPort);
-    when(argumentPort.client()).thenReturn(FakeOAuth2ProviderValuesFactory.create());
+    when(argumentPort.client()).thenReturn(FakeOAuth2ProviderValuesFactory.kakao());
     // when
     val token = resolver.accessToken("kakao",
-        "JPCNU8ez8OGIC29iiJUceaOqO1vzNzFV2r5O66Bh0FlC5TiugkySkPwN_MsKPXLrAAABjt25bqV-jFVpBnvzXw",
-        "kakao,8e493eda-c2c8-4d73-b3fa-af6f505d5eed");
+        "rJ8CaKuAmw6OLHJ3gkkBYJ3GIAoWhhMGPbSGb-9FDL0cdl9cK3SV5a1B1K4KPXNOAAABjvGvokpAPV-WDrAHcw",
+        "kakao,90656829-94a7-4615-883d-b14378bcb08a");
+    // then
+    assertThat(token).isNotNull();
+  }
+
+  // http://localhost:8080/login/oauth2/code/naver?code=i8VKrVY4NbxNvulxX9&state=naver,2690ef3f-6f14-4f00-a6d0-0dbfa2002b91
+
+  // OAuth2AccessToken[tokenType=bearer,
+  // accessToken=AAAAOFVAxAxC56jkp6MooXSnVxrsqksXsCvCElc72wwfhirGzk7H4UIjOfAWjX-2XQJOUh-RPKkre17iPuG07VVZ4D4,
+  // idToken=null, expiresIn=3600,
+  // refreshToken=a14PE2NPszYPOFQVra8z83ek6FhTR0RsV1H0ySO9mjh2LNqghPmrkPMzVolYLHVvSC9SB7mipJQujTIip9yI2h02cipH8RBdQisFiiOch02meklgeGmcebZA01KvlisAjipPipBU,
+  // refreshTokenExpiresIn=0, scope=null, error=null, errorDescription=null, errorCode=null]
+  @Test
+  void naver에서_액세스_토큰_얻기() throws OperationNotSupportedException {
+    // given
+    val argumentPort = mock(OAuth2ArgumentPort.class);
+    when(chooser.choose(anyString())).thenReturn(argumentPort);
+    when(argumentPort.client()).thenReturn(FakeOAuth2ProviderValuesFactory.naver());
+    // when
+    val token = resolver.accessToken("naver",
+        "TGsul8r5n6K0gZuiWE",
+        "naver,71a31e35-fd03-411c-8b3a-ccce600f996f");
     // then
     assertThat(token).isNotNull();
   }
 
   private static class FakeOAuth2ProviderValuesFactory {
 
-    private static OAuth2ProviderValues create() {
+    private static OAuth2ProviderValues kakao() {
       return OAuth2ProviderValues.builder()
           .registration(Registration.builder()
               .tokenGrantType("authorization_code")
@@ -70,6 +90,20 @@ class OAuth2MemberInfoResolverTest {
               .build())
           .provider(Provider.builder()
               .tokenUri("https://kauth.kakao.com/oauth/token")
+              .build())
+          .build();
+    }
+
+    private static OAuth2ProviderValues naver() {
+      return OAuth2ProviderValues.builder()
+          .registration(Registration.builder()
+              .tokenGrantType("authorization_code")
+              .clientId("56U6XURhbeleUy6Y3Sml")
+              .redirectUri("http://localhost:8080/login/oauth2/code/naver")
+              .clientSecret("k1NVSjQh31")
+              .build())
+          .provider(Provider.builder()
+              .tokenUri("https://nid.naver.com/oauth2.0/token")
               .build())
           .build();
     }
