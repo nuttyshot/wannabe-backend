@@ -24,17 +24,13 @@ public class OAuth2MemberFactory {
     @SuppressWarnings("unchecked")
     val response = (Map<String, Object>) resBody.getOrDefault("response", Map.of());
 
-    // value는 Map<String, Object> 형태이다.
-    @SuppressWarnings("unchecked")
-    val value = (Map<String, Object>) response.getOrDefault("value", Map.of());
-
-    val name = (String) value.getOrDefault("name", null);
-    val nickname = (String) value.getOrDefault("nickname", null);
-    val age = (String) value.getOrDefault("age", null);
-    val email = (String) value.getOrDefault("email", null);
-    val birthday = (String) value.getOrDefault("birthday", null);
-    val birthyear = (String) value.getOrDefault("birthyear", null);
-    val mobile = (String) value.getOrDefault("mobile", null);
+    val name = (String) response.getOrDefault("name", null);
+    val nickname = (String) response.getOrDefault("nickname", null);
+    val age = (String) response.getOrDefault("age", null);
+    val email = (String) response.getOrDefault("email", null);
+    val birthday = (String) response.getOrDefault("birthday", null);
+    val birthyear = (String) response.getOrDefault("birthyear", null);
+    val mobile = (String) response.getOrDefault("mobile", null);
 
     return OAuth2Member.builder()
         .email(email)

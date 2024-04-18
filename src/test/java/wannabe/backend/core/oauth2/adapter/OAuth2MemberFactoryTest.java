@@ -34,8 +34,8 @@ class OAuth2MemberFactoryTest {
   void 네이버_응답_OAuth2Member_로_변환되어야한다() {
     // given
     val oauth2Response = Map.of("response",
-        (Object) Map.of("value", Map.of("email", "MOCK_EMAIL",
-            "birthyear", "MOCK_BIRTHYEAR")));
+        (Object) Map.of("email", "MOCK_EMAIL",
+            "birthyear", "MOCK_BIRTHYEAR"));
     // when
     val oAuth2Member = factory.create("naver", oauth2Response);
     // then
