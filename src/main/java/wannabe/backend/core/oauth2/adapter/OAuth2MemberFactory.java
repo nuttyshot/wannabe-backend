@@ -15,8 +15,6 @@ public class OAuth2MemberFactory {
     return switch (registrationId) {
       case KAKAO -> kakao(registrationId, resBody);
       case NAVER -> naver(registrationId, resBody);
-      default ->
-          throw new IllegalArgumentException("registrationId는 kakao만 가능합니다 : " + registrationId);
     };
   }
 
