@@ -12,7 +12,7 @@ class AgeRangeTest {
   void null이면_null로_반환한다() {
     // given
     // when
-    val ageRange = AgeRange.fromString(null);
+    val ageRange = AgeRange.fromKakaoString(null);
     // then
     assertThat(ageRange).isNull();
   }
@@ -21,9 +21,9 @@ class AgeRangeTest {
   void null이_아니면_해당하는_enum을_반환한다() {
     // given
     // when
-    val ageRange = AgeRange.fromString("20~29");
+    val ageRange = AgeRange.fromKakaoString("20~29");
     // then
-    assertThat(ageRange).isEqualTo(AgeRange.AGE_20_29);
+    assertThat(ageRange).isEqualTo(AgeRange.TWENTIES);
   }
 
   @Test
@@ -32,6 +32,6 @@ class AgeRangeTest {
     // when
     // then
     assertThrows(IllegalArgumentException.class,
-        () -> AgeRange.fromString("90~99"));
+        () -> AgeRange.fromKakaoString("90~99"));
   }
 }

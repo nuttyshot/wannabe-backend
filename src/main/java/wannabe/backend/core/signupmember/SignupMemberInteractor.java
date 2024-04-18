@@ -15,11 +15,23 @@ import wannabe.backend.core.oauth2.adapter.OAuth2Member;
 public class SignupMemberInteractor implements SignupMemberPort {
 
   private final MemberRepository memberRepository;
-  private final MemberFactory memberFactory;
+  private final MemberFactory kakaoMemberFactory;
+  private final MemberFactory naverMemberFactory;
 
   @Override
   public long signup(@NonNull OAuth2Member oAuth2Member) {
+    val memberFactory = getMemberFactory(oAuth2Member.provider());
     val saveMember = memberRepository.save(memberFactory.create(oAuth2Member));
     return saveMember.getId();
+  }
+
+  private MemberFactory getMemberFactory(@NonNull String provider) {
+    if ("kakao".equals(provider)) {
+      return kakaoMemberFactory;
+    }
+    if ("naver".equals(provider)) {
+      return naverMemberFactory;
+    }
+    throw new IllegalArgumentException(provider + "는 지원하지 않습니다.");
   }
 }
