@@ -36,6 +36,13 @@ spring:
               age_range,
               birthday,
               phone_number
+          naver:
+            provider: naver
+            client-id: 56U6XURhbeleUy6Y3Sml
+            authorization-response-type: code
+            client-secret: k1NVSjQh31
+            scope: >
+              email
         
 
         provider:
@@ -43,6 +50,9 @@ spring:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
+
+          naver:
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize
 
 jwt:
   secret: 236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041493123432423412312312312sidjsa90dias0f9asi0d9iasd09asid09asidas9dia0s9di0as9i0
@@ -72,6 +82,9 @@ spring:
           kakao:
             redirect-uri: http://localhost:8080/login/oauth2/code/kakao
 
+          naver:
+            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+
 
 ---
 
@@ -90,4 +103,7 @@ spring:
         registration:
           kakao:
             redirect-uri: http://ec2-13-125-88-75.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/kakao
+
+          naver:
+            redirect-uri: http://ec2-13-125-88-75.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/naver
 

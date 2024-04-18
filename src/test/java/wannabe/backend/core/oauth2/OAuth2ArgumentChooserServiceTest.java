@@ -20,8 +20,11 @@ class OAuth2ArgumentChooserServiceTest {
   @Mock
   private OAuth2ArgumentPort kakaoArgumentPort;
 
+  @Mock
+  private OAuth2ArgumentPort naverArgumentPort;
+
   @Test
-  void 잘_선택되는지_확인() throws OperationNotSupportedException {
+  void kakao_잘_선택되는지_확인() throws OperationNotSupportedException {
     // given
     // when
     val kakao = chooser.choose("kakao");
@@ -30,10 +33,20 @@ class OAuth2ArgumentChooserServiceTest {
   }
 
   @Test
-  void 지정된거_아니면_NotS() {
+  void naver_잘_선택되는지_확인() throws OperationNotSupportedException {
+    // given
+    // when
+    val naver = chooser.choose("naver");
+    // then
+    assertThat(naver).isEqualTo(naverArgumentPort);
+  }
+
+  @Test
+  void 지정된거_아니면_OperationNotSupportedException이_발생한다() {
     // given
     // when
     // then
-    assertThrows(OperationNotSupportedException.class, () -> chooser.choose("naver"));
+    assertThrows(OperationNotSupportedException.class,
+        () -> chooser.choose("INVALID_REGISTRATION_ID"));
   }
 }

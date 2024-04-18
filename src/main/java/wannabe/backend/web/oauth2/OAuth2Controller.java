@@ -23,6 +23,11 @@ public class OAuth2Controller {
     return new RedirectView(redirectUri("kakao"));
   }
 
+  @GetMapping("/naver")
+  public RedirectView naver() {
+    return new RedirectView(redirectUri("naver"));
+  }
+
   private String redirectUri(@NonNull String registrationId) {
     try {
       val argumentPort = chooser.choose(registrationId);
