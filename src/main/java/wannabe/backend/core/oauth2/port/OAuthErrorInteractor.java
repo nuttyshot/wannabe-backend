@@ -1,5 +1,7 @@
 package wannabe.backend.core.oauth2.port;
 
+import static wannabe.backend.core.oauth2.Provider.*;
+
 import java.util.Map;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +24,13 @@ public class OAuthErrorInteractor implements OAuth2ErrorPort {
         registrationId, resBody));
 
     switch (registrationId) {
-      case Provider.KAKAO -> handleKakaoError();
-      // TODO. NAVER 추가해야 됩니다.
-      default ->
-          throw new IllegalArgumentException("registrationId는 kakao만 가능합니다 : " + registrationId);
+      case KAKAO -> handleKakaoError();
+      case NAVER -> handleNaverError();
     }
+  }
+
+  private void handleNaverError() {
+    throw new OAuth2NetworkException("naver 로그인에 실패했습니다. 계속 문제가 반복되면 고객센터에 연락해주세요.");
   }
 
   private void handleKakaoError() {
