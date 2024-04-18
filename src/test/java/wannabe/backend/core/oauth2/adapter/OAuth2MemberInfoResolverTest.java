@@ -1,9 +1,11 @@
 package wannabe.backend.core.oauth2.adapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static wannabe.backend.core.oauth2.Provider.KAKAO;
+import static wannabe.backend.core.oauth2.Provider.NAVER;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.naming.OperationNotSupportedException;
@@ -25,6 +27,7 @@ import wannabe.backend.core.oauth2.port.OAuth2ErrorPort;
  * code는 일회성 이기 때문에 테스트할 때마다 재발급 받으셔야 합니다. <p>
  * <a href="http://localhost:8080/oauth2/authorization/kakao">kakao</a>
  */
+@Disabled("code를 kakao, naver로 부터 얻어서 사용하세요!")
 @ExtendWith(MockitoExtension.class)
 class OAuth2MemberInfoResolverTest {
 
@@ -47,10 +50,10 @@ class OAuth2MemberInfoResolverTest {
   void kakao에서_액세스_토큰_얻기() throws OperationNotSupportedException {
     // given
     val argumentPort = mock(OAuth2ArgumentPort.class);
-    when(chooser.choose(anyString())).thenReturn(argumentPort);
+    when(chooser.choose(any())).thenReturn(argumentPort);
     when(argumentPort.client()).thenReturn(FakeOAuth2ProviderValuesFactory.kakao());
     // when
-    val token = resolver.accessToken("kakao",
+    val token = resolver.accessToken(KAKAO,
         "rJ8CaKuAmw6OLHJ3gkkBYJ3GIAoWhhMGPbSGb-9FDL0cdl9cK3SV5a1B1K4KPXNOAAABjvGvokpAPV-WDrAHcw",
         "kakao,90656829-94a7-4615-883d-b14378bcb08a");
     // then
@@ -68,10 +71,10 @@ class OAuth2MemberInfoResolverTest {
   void naver에서_액세스_토큰_얻기() throws OperationNotSupportedException {
     // given
     val argumentPort = mock(OAuth2ArgumentPort.class);
-    when(chooser.choose(anyString())).thenReturn(argumentPort);
+    when(chooser.choose(any())).thenReturn(argumentPort);
     when(argumentPort.client()).thenReturn(FakeOAuth2ProviderValuesFactory.naver());
     // when
-    val token = resolver.accessToken("naver",
+    val token = resolver.accessToken(NAVER,
         "TGsul8r5n6K0gZuiWE",
         "naver,71a31e35-fd03-411c-8b3a-ccce600f996f");
     // then

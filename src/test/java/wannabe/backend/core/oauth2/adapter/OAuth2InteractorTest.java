@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static wannabe.backend.core.oauth2.Provider.*;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.core.finduser.FindMemberPort;
 import wannabe.backend.core.oauth2.OAuth2Presenter;
+import wannabe.backend.core.oauth2.Provider;
 import wannabe.backend.core.signupmember.SignupMemberPort;
 import wannabe.backend.core.token.FakeLoginTokenFactory;
 import wannabe.backend.core.token.LoginTokenPort;
@@ -66,7 +68,7 @@ class OAuth2InteractorTest {
   private static class FakeOAuth2RequestFactory {
 
     private static OAuth2Request create() {
-      return OAuth2Request.builder().registrationId("MOCK_REGISTRATION_ID").code("MOCK_CODE")
+      return OAuth2Request.builder().registrationId(KAKAO).code("MOCK_CODE")
           .state("MOCK_STATE").build();
     }
   }
@@ -74,7 +76,11 @@ class OAuth2InteractorTest {
   private static class FakeOAuth2MemberFactory {
 
     private static OAuth2Member nonMember() {
-      return OAuth2Member.builder().email("MOCK_EMAIL").birthyear("MOCK_BIRTHYEAR").build();
+      return OAuth2Member.builder()
+          .provider(KAKAO)
+          .email("MOCK_EMAIL")
+          .birthyear("MOCK_BIRTHYEAR")
+          .build();
     }
   }
 }

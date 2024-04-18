@@ -1,6 +1,7 @@
 package wannabe.backend.core.oauth2.adapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static wannabe.backend.core.oauth2.Provider.*;
 
 import java.util.Map;
 import lombok.val;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.core.oauth2.Provider;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2MemberFactoryTest {
@@ -23,7 +25,7 @@ class OAuth2MemberFactoryTest {
             "birthyear", "MOCK_BIRTHYEAR",
             "profile", Map.of("nickname", "MOCK_NICKNAME")));
     // when
-    val oAuth2Member = factory.create("kakao", oauth2Response);
+    val oAuth2Member = factory.create(KAKAO, oauth2Response);
     // then
     assertThat(oAuth2Member.email()).isEqualTo("MOCK_EMAIL");
     assertThat(oAuth2Member.birthyear()).isEqualTo("MOCK_BIRTHYEAR");
@@ -37,7 +39,7 @@ class OAuth2MemberFactoryTest {
         (Object) Map.of("email", "MOCK_EMAIL",
             "birthyear", "MOCK_BIRTHYEAR"));
     // when
-    val oAuth2Member = factory.create("naver", oauth2Response);
+    val oAuth2Member = factory.create(NAVER, oauth2Response);
     // then
     assertThat(oAuth2Member.email()).isEqualTo("MOCK_EMAIL");
     assertThat(oAuth2Member.birthyear()).isEqualTo("MOCK_BIRTHYEAR");

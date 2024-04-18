@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import wannabe.backend.core.oauth2.OAuth2ArgumentChooserService;
 import wannabe.backend.core.oauth2.OAuth2ArgumentPort;
+import wannabe.backend.core.oauth2.Provider;
 import wannabe.backend.core.oauth2.port.OAuth2ErrorPort;
 
 @Service
@@ -66,7 +67,7 @@ public class OAuth2MemberInfoResolver implements OAuth2MemberInfoGateway {
    * @return 카카오에서 받은 액세스 토큰
    */
   @Override
-  public String accessToken(@NonNull String registrationId, @NonNull String code,
+  public String accessToken(@NonNull Provider registrationId, @NonNull String code,
       @NonNull String state) {
 
     val argumentPort = argumentPort(registrationId);
@@ -102,7 +103,7 @@ public class OAuth2MemberInfoResolver implements OAuth2MemberInfoGateway {
     }
   }
 
-  private OAuth2ArgumentPort argumentPort(@NonNull String registrationId) {
+  private OAuth2ArgumentPort argumentPort(@NonNull Provider registrationId) {
     try {
       return chooser.choose(registrationId);
     } catch (OperationNotSupportedException e) {

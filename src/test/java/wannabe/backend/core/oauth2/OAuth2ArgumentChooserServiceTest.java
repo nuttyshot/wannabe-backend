@@ -1,7 +1,8 @@
 package wannabe.backend.core.oauth2;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static wannabe.backend.core.oauth2.Provider.KAKAO;
+import static wannabe.backend.core.oauth2.Provider.NAVER;
 
 import javax.naming.OperationNotSupportedException;
 import lombok.val;
@@ -27,7 +28,7 @@ class OAuth2ArgumentChooserServiceTest {
   void kakao_잘_선택되는지_확인() throws OperationNotSupportedException {
     // given
     // when
-    val kakao = chooser.choose("kakao");
+    val kakao = chooser.choose(KAKAO);
     // then
     assertThat(kakao).isEqualTo(kakaoArgumentPort);
   }
@@ -36,17 +37,8 @@ class OAuth2ArgumentChooserServiceTest {
   void naver_잘_선택되는지_확인() throws OperationNotSupportedException {
     // given
     // when
-    val naver = chooser.choose("naver");
+    val naver = chooser.choose(NAVER);
     // then
     assertThat(naver).isEqualTo(naverArgumentPort);
-  }
-
-  @Test
-  void 지정된거_아니면_OperationNotSupportedException이_발생한다() {
-    // given
-    // when
-    // then
-    assertThrows(OperationNotSupportedException.class,
-        () -> chooser.choose("INVALID_REGISTRATION_ID"));
   }
 }

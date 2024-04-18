@@ -2,11 +2,13 @@ package wannabe.backend.web.oauth2;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static wannabe.backend.core.oauth2.Provider.*;
 
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
@@ -37,21 +39,21 @@ class OAuth2ControllerTest {
   void redirect_uri_정상_생성() throws OperationNotSupportedException {
     // given
     val argumentPort = mock(OAuth2ArgumentPort.class);
-    when(oAuth2ArgumentChooserService.choose(anyString())).thenReturn(argumentPort);
+    when(oAuth2ArgumentChooserService.choose(any())).thenReturn(argumentPort);
     when(argumentPort.client()).thenReturn(oAuth2ProviderValues());
     // when
     val redirectView = controller.kakao();
     // then
-    assertThat(redirectView.getUrl()).contains("kakao");
+    assertThat(redirectView.getUrl()).contains("KAKAO");
 
-    verify(oAuth2ArgumentChooserService, only()).choose("kakao");
+    verify(oAuth2ArgumentChooserService, only()).choose(KAKAO);
   }
 
   @Test
   void chooser호출중_OperationNotSupportedException_발생시_IllegalArgumentException으로_던진다()
       throws OperationNotSupportedException {
     // given
-    when(oAuth2ArgumentChooserService.choose(anyString())).thenThrow(
+    when(oAuth2ArgumentChooserService.choose(any())).thenThrow(
         OperationNotSupportedException.class);
     // when
     // then

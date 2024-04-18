@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.core.finduser.AgeRange;
+import wannabe.backend.core.oauth2.Provider;
 import wannabe.backend.core.oauth2.adapter.OAuth2Member;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,7 +24,7 @@ class NaverMemberFactoryTest {
     // given
     // when
     val member = factory.create(OAuth2Member.builder()
-        .provider("naver")
+        .provider(Provider.NAVER)
         .email("MOCK_EMAIL")
         .birthyear("2020")
         .ageRange("20-29")

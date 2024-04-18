@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import wannabe.backend.core.oauth2.OAuth2ArgumentChooserService;
+import wannabe.backend.core.oauth2.Provider;
 
 @RestController
 @RequestMapping("/oauth2/authorization")
@@ -20,15 +21,15 @@ public class OAuth2Controller {
 
   @GetMapping("/kakao")
   public RedirectView kakao() {
-    return new RedirectView(redirectUri("kakao"));
+    return new RedirectView(redirectUri(Provider.KAKAO));
   }
 
   @GetMapping("/naver")
   public RedirectView naver() {
-    return new RedirectView(redirectUri("naver"));
+    return new RedirectView(redirectUri(Provider.NAVER));
   }
 
-  private String redirectUri(@NonNull String registrationId) {
+  private String redirectUri(@NonNull Provider registrationId) {
     try {
       val argumentPort = chooser.choose(registrationId);
       return String.format("%s?response_type=%s&client_id=%s&state=%s&redirect_uri=%s&scope=%s",
@@ -44,7 +45,7 @@ public class OAuth2Controller {
     }
   }
 
-  private String state(@NonNull String registrationId) {
+  private String state(@NonNull Provider registrationId) {
     return String.format("%s,%s", registrationId, UUID.randomUUID());
   }
 }

@@ -1,5 +1,7 @@
 package wannabe.backend.core.oauth2;
 
+import static wannabe.backend.core.oauth2.Provider.*;
+
 import javax.naming.OperationNotSupportedException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +14,13 @@ public class OAuth2ArgumentChooserService {
   private final OAuth2ArgumentPort kakaoArgumentPort;
   private final OAuth2ArgumentPort naverArgumentPort;
 
-  public OAuth2ArgumentPort choose(@NonNull String registrationId)
+  public OAuth2ArgumentPort choose(@NonNull Provider registrationId)
       throws OperationNotSupportedException {
 
-    if ("kakao".equals(registrationId)) {
+    if (KAKAO == registrationId) {
       return kakaoArgumentPort;
     }
-    if ("naver".equals(registrationId)) {
+    if (NAVER == registrationId) {
       return naverArgumentPort;
     }
     throw new OperationNotSupportedException("kakao, naver만 지원합니다.");

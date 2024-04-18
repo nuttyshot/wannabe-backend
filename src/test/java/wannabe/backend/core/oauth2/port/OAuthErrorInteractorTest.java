@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.core.oauth2.Provider;
 
 @ExtendWith(MockitoExtension.class)
 class OAuthErrorInteractorTest {
@@ -20,7 +21,7 @@ class OAuthErrorInteractorTest {
     // given
     // when
     // then
-    assertDoesNotThrow(() -> interactor.receive("kakao", 200, Map.of()));
+    assertDoesNotThrow(() -> interactor.receive(Provider.KAKAO, 200, Map.of()));
   }
 
   @Test
@@ -29,7 +30,7 @@ class OAuthErrorInteractorTest {
     // when
     // then
     assertThrowsExactly(OAuth2NetworkException.class,
-        () -> interactor.receive("kakao", 400, Map.of()));
+        () -> interactor.receive(Provider.KAKAO, 400, Map.of()));
   }
 
   @Test
@@ -38,6 +39,6 @@ class OAuthErrorInteractorTest {
     // when
     // then
     assertThrowsExactly(IllegalArgumentException.class,
-        () -> interactor.receive("naver", 400, Map.of()));
+        () -> interactor.receive(Provider.NAVER, 400, Map.of()));
   }
 }

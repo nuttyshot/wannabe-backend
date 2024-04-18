@@ -1,5 +1,7 @@
 package wannabe.backend.core.signupmember;
 
+import static wannabe.backend.core.oauth2.Provider.*;
+
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wannabe.backend.core.member.MemberFactory;
 import wannabe.backend.core.member.MemberRepository;
+import wannabe.backend.core.oauth2.Provider;
 import wannabe.backend.core.oauth2.adapter.OAuth2Member;
 
 @Service
@@ -25,11 +28,11 @@ public class SignupMemberInteractor implements SignupMemberPort {
     return saveMember.getId();
   }
 
-  private MemberFactory getMemberFactory(@NonNull String provider) {
-    if ("kakao".equals(provider)) {
+  private MemberFactory getMemberFactory(@NonNull Provider provider) {
+    if (KAKAO == provider) {
       return kakaoMemberFactory;
     }
-    if ("naver".equals(provider)) {
+    if (NAVER == provider) {
       return naverMemberFactory;
     }
     throw new IllegalArgumentException(provider + "는 지원하지 않습니다.");

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import wannabe.backend.core.oauth2.Provider;
 import wannabe.backend.core.oauth2.adapter.OAuth2Adapter;
 import wannabe.backend.core.oauth2.adapter.OAuth2Request;
 
@@ -24,7 +25,7 @@ public class OAuth2CallbackController {
    */
   @GetMapping
   public void success(
-      @PathVariable(value = "providerId") String providerId, // 현재는 "KAKAO" 하나이다.
+      @PathVariable(value = "providerId") Provider providerId,
       @RequestParam(value = "code") String code,
       @RequestParam(value = "state") String state,
       HttpServletResponse response) throws IOException {
@@ -32,7 +33,7 @@ public class OAuth2CallbackController {
     val registrationId = state.split(",")[0];
 
     val oAuth2Request = OAuth2Request.builder()
-        .registrationId(registrationId)
+        .registrationId(Provider.valueOf(registrationId))
         .code(code)
         .state(state)
         .build();
