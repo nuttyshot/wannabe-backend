@@ -1,4 +1,4 @@
-package wannabe.backend.web.main;
+package wannabe.backend.web.main.bestdailyclothes;
 
 import java.time.LocalDateTime;
 import java.util.List;

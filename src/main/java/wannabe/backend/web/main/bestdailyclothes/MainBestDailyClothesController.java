@@ -1,4 +1,4 @@
-package wannabe.backend.web.main;
+package wannabe.backend.web.main.bestdailyclothes;
 
 import java.awt.print.Pageable;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.web.main.ProductsResponse.ProductResponse;
+import wannabe.backend.web.main.bestdailyclothes.ProductsResponse.ProductResponse;
 
 @RestController
 @RequestMapping("/main/best-daily-clothes")
