@@ -14,9 +14,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import wannabe.backend.core.finduser.AgeRange;
 import wannabe.backend.core.finduser.Audit;
 
+@ToString
 @Table(name = "member")
 @Builder(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
