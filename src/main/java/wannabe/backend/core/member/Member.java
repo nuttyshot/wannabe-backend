@@ -1,5 +1,7 @@
 package wannabe.backend.core.member;
 
+import static lombok.AccessLevel.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,9 +22,9 @@ import wannabe.backend.core.finduser.Audit;
 
 @ToString
 @Table(name = "member")
-@Builder(access = AccessLevel.PACKAGE)
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder(access = PACKAGE)
+@AllArgsConstructor(access = PACKAGE)
+@NoArgsConstructor(access = PROTECTED)
 @Entity
 public class Member extends Audit {
 
@@ -32,24 +34,24 @@ public class Member extends Audit {
   @Column(name = "id", nullable = false)
   private Long id;
 
-  @Column(name = "email", length = 255, nullable = false)
+  @Column(name = "email", length = 100, nullable = false, unique = true)
   private String email;
 
   @Getter
-  @Column(name = "birthday")
+  @Column(name = "birthday", nullable = false)
   private LocalDate birthday;
 
-  @Column(name = "nickname", length = 30)
+  @Column(name = "nickname", length = 255, nullable = false)
   private String nickname;
 
-  @Column(name = "name", length = 50)
+  @Column(name = "name", length = 50, nullable = false)
   private String name;
 
   @Getter
   @Enumerated(EnumType.STRING)
-  @Column(name = "age_range", length = 10)
+  @Column(name = "age_range", length = 10, nullable = false)
   private AgeRange ageRange;
 
-  @Column(name = "phone_no", length = 20)
-  private String phoneNo;
+  @Column(name = "provider", length = 20, nullable = false)
+  private Provider provider;
 }
