@@ -15,9 +15,7 @@ import wannabe.backend.web.main.ProductsResponse.ProductResponse;
 public class MainNewController {
 
   @GetMapping
-  public ProductsResponse findBestDailyClothes(
-      @PageableDefault(page = 0, size = 10) Pageable pageable) {
-
+  public ProductsResponse find(@PageableDefault(page = 0, size = 10) Pageable pageable) {
     return ProductsResponse.builder()
         .productResponses(List.of(
             ProductResponse.builder()
