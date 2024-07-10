@@ -1,4 +1,4 @@
-package wannabe.backend.web.main.bestdailyclothes;
+package wannabe.backend.web.main.weeklybestperformancelook;
 
 import java.awt.print.Pageable;
 import java.time.LocalDate;
@@ -7,11 +7,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.web.main.bestdailyclothes.ProductsResponse.ProductResponse;
+import wannabe.backend.web.main.ProductsResponse;
+import wannabe.backend.web.main.ProductsResponse.ProductResponse;
 
 @RestController
-@RequestMapping("/main/best-daily-clothes")
-public class MainBestDailyClothesController {
+@RequestMapping("/main/weekly-best-performance-look")
+public class MainWeeklyBestPerformanceLookController {
 
   @GetMapping
   public ProductsResponse findBestDailyClothes(
@@ -20,21 +21,19 @@ public class MainBestDailyClothesController {
     return ProductsResponse.builder()
         .productResponses(List.of(
             ProductResponse.builder()
-                .eventDate(LocalDate.of(2023, 7, 1).atStartOfDay())
+                .eventDate(LocalDate.of(2023, 7, 1))
                 .eventName("어텐션 뮤직뱅크")
-                .celebrityName("민지")
-                .productName("루이비통 맨즈 스포티")
-                .hashTags(List.of("#blue", "#highend", "#attention"))
-                .productImages(
+                .idolMemberName("민지")
+                .clothesName("루이비통 맨즈 스포티")
+                .clothesImageUrls(
                     List.of("https://www.product-image1.com", "https://www.product-image2.com"))
                 .build(),
             ProductResponse.builder()
-                .eventDate(LocalDate.of(2023, 7, 1).atStartOfDay())
+                .eventDate(LocalDate.of(2023, 7, 1))
                 .eventName("어텐션 뮤직뱅크")
-                .celebrityName("민지")
-                .productName("루이비통 맨즈 스포티")
-                .hashTags(List.of("#blue", "#highend", "#attention"))
-                .productImages(
+                .idolMemberName("민지")
+                .clothesName("루이비통 맨즈 스포티")
+                .clothesImageUrls(
                     List.of("https://www.product-image1.com", "https://www.product-image2.com"))
                 .build()
         ))
