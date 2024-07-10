@@ -1,5 +1,6 @@
 package wannabe.backend.core.member;
 
+import static jakarta.persistence.EnumType.STRING;
 import static lombok.AccessLevel.*;
 
 import jakarta.persistence.Column;
@@ -52,6 +53,7 @@ public class Member extends Audit {
   @Column(name = "age_range", length = 10, nullable = false)
   private AgeRange ageRange;
 
+  @Enumerated(STRING)
   @Column(name = "provider", length = 20, nullable = false)
   private Provider provider;
 }
