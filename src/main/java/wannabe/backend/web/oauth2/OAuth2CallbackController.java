@@ -1,5 +1,7 @@
 package wannabe.backend.web.oauth2;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import wannabe.backend.core.oauth2.Provider;
 import wannabe.backend.core.oauth2.adapter.OAuth2Adapter;
 import wannabe.backend.core.oauth2.adapter.OAuth2Request;
 
+@Hidden
 @RestController
 @RequestMapping("/login/oauth2/code/{providerId}")
 @RequiredArgsConstructor

@@ -1,5 +1,7 @@
 package wannabe.backend.web.oauth2;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
 import javax.naming.OperationNotSupportedException;
 import lombok.NonNull;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import wannabe.backend.core.oauth2.OAuth2ArgumentChooserService;
 import wannabe.backend.core.oauth2.Provider;
 
+@Hidden
 @RestController
 @RequestMapping("/oauth2/authorization")
 @RequiredArgsConstructor

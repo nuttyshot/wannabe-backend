@@ -1,5 +1,7 @@
 package wannabe.backend.web.main.weeklybestperformancelook;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import wannabe.backend.web.main.ProductsResponse;
 import wannabe.backend.web.main.ProductsResponse.ProductResponse;
 
+@Tag(name = "메인")
 @RestController
 @RequestMapping("/main/weekly-best-performance-look")
 public class MainWeeklyBestPerformanceLookController {
 
+  @Operation(summary = "WEEKLY BEST PERFORMANCE LOOK 조회")
   @GetMapping
   public ProductsResponse find(@PageableDefault(page = 0, size = 10) Pageable pageable) {
 
