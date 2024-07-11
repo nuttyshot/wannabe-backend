@@ -1,7 +1,9 @@
 package wannabe.backend.core.finduser;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static wannabe.backend.core.member.Provider.*;
 
+import java.time.LocalDate;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +37,13 @@ class FindMemberInteractorTest {
   }
 
   private static Member member() {
-    return FakeMember.builder().email("MOCK_EMAIL").build().toMember();
+    return FakeMember.builder()
+        .email("MOCK_EMAIL")
+        .birthday(LocalDate.MIN)
+        .nickname("MOCK_NICKNAME")
+        .name("MOCK_NAME")
+        .ageRange(AgeRange.TEENS)
+        .provider(KAKAO)
+        .build().toMember();
   }
 }

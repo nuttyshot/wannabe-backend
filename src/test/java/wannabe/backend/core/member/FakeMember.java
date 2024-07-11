@@ -1,5 +1,7 @@
 package wannabe.backend.core.member;
 
+import static wannabe.backend.core.member.Provider.*;
+
 import java.time.LocalDate;
 import lombok.Builder;
 import lombok.NonNull;
@@ -15,7 +17,7 @@ public record FakeMember(
     String nickname,
     String name,
     AgeRange ageRange,
-    String phoneNo) {
+    Provider provider) {
 
   public Member toMember() {
     return Member.builder()
@@ -25,7 +27,7 @@ public record FakeMember(
         .nickname(nickname)
         .name(name)
         .ageRange(ageRange)
-        .phoneNo(phoneNo)
+        .provider(provider)
         .build();
   }
 }

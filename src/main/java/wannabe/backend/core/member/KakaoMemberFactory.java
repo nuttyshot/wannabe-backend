@@ -21,7 +21,6 @@ public class KakaoMemberFactory implements MemberFactory {
         .nickname(oAuth2Member.nickname())
         .name(oAuth2Member.name())
         .ageRange(AgeRange.fromKakaoString(oAuth2Member.ageRange()))
-        .phoneNo(oAuth2Member.phoneNo())
         .build();
   }
 

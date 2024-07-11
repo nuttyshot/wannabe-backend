@@ -36,9 +36,9 @@ public class ClothesImage {
   @JoinColumn(name = "clothes_id", nullable = false)
   private Clothes clothes;
 
-  @Column(name = "id", length = 255, nullable = false)
+  @Column(name = "url", length = 255, nullable = false)
   private String url;
 
-  @Column(name = "id", nullable = false)
+  @Column(name = "sequence", nullable = false)
   private int sequence;
 }
