@@ -1,8 +1,8 @@
 package wannabe.backend.web.main.news;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
