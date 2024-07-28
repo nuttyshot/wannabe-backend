@@ -1,4 +1,4 @@
-package wannabe.backend.core.clothes;
+package wannabe.backend.core.product;
 
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
@@ -23,12 +23,12 @@ import wannabe.backend.core.finduser.Audit;
 import wannabe.backend.core.idolmember.IdolMember;
 
 @ToString
-@Table(name = "clothes")
+@Table(name = "product")
 @Builder(access = PACKAGE)
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class Clothes extends Audit {
+public class Product extends Audit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +46,7 @@ public class Clothes extends Audit {
 
   @Enumerated(STRING)
   @Column(name = "type", length = 50, nullable = false)
-  private ClothesType clothesType;
+  private ProductType productType;
 
   @Column(name = "purchase_link", length = 255)
   private String purchaseLink;

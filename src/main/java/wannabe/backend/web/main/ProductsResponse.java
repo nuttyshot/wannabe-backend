@@ -12,8 +12,8 @@ public record ProductsResponse(@NonNull List<ProductResponse> productResponses) 
   public record ProductResponse(@NonNull LocalDate eventDate,
                                 @NonNull String eventName,
                                 @NonNull String idolMemberName,
-                                @NonNull String clothesName,
-                                @NonNull List<String> clothesImageUrls) {
+                                @NonNull String productName,
+                                @NonNull List<String> productImageUrls) {
 
   }
 }

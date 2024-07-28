@@ -1,4 +1,4 @@
-package wannabe.backend.web.clothes;
+package wannabe.backend.web.product;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "상품")
 @RestController
-@RequestMapping("/clothes")
+@RequestMapping("/products")
 @RequiredArgsConstructor
-public class ClothesAddController {
+public class ProductAddController {
 
   @Operation(summary = "상품 추가")
   @PostMapping

@@ -26,16 +26,16 @@ public class MainNewController {
                 .eventDate(LocalDate.of(2023, 7, 1))
                 .eventName("어텐션 뮤직뱅크")
                 .idolMemberName("민지")
-                .clothesName("루이비통 맨즈 스포티")
-                .clothesImageUrls(
+                .productName("루이비통 맨즈 스포티")
+                .productImageUrls(
                     List.of("https://www.product-image1.com", "https://www.product-image2.com"))
                 .build(),
             ProductResponse.builder()
                 .eventDate(LocalDate.of(2023, 7, 1))
                 .eventName("어텐션 뮤직뱅크")
                 .idolMemberName("민지")
-                .clothesName("루이비통 맨즈 스포티")
-                .clothesImageUrls(
+                .productName("루이비통 맨즈 스포티")
+                .productImageUrls(
                     List.of("https://www.product-image1.com", "https://www.product-image2.com"))
                 .build()
         ))
