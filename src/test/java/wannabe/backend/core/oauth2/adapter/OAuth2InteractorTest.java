@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static wannabe.backend.core.oauth2.Provider.*;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.*;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -14,12 +14,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.core.finduser.FindMemberPort;
-import wannabe.backend.core.oauth2.OAuth2Presenter;
-import wannabe.backend.core.oauth2.Provider;
-import wannabe.backend.core.signupmember.SignupMemberPort;
+import wannabe.backend.member.usecase.findmember.FindMemberPort;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2Presenter;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Interactor;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Member;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2MemberInfoGateway;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Request;
+import wannabe.backend.member.usecase.signupmember.SignupMemberPort;
 import wannabe.backend.core.token.FakeLoginTokenFactory;
-import wannabe.backend.core.token.LoginTokenPort;
+import wannabe.backend.token.LoginTokenPort;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2InteractorTest {

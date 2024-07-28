@@ -2,20 +2,17 @@ package wannabe.backend.core.oauth2;
 
 import static java.nio.charset.StandardCharsets.*;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import lombok.val;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.core.oauth2.adapter.OAuth2Response;
-import wannabe.backend.core.oauth2.redirectpages.FrontBaseUrlArgumentGateway;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2Formatter;
+import wannabe.backend.member.usecase.oauth2integration.redirectpages.FrontBaseUrlArgumentGateway;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2FormatterTest {

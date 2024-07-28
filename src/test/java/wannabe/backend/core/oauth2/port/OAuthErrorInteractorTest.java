@@ -2,14 +2,16 @@ package wannabe.backend.core.oauth2.port;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static wannabe.backend.core.oauth2.Provider.KAKAO;
-import static wannabe.backend.core.oauth2.Provider.NAVER;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.KAKAO;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.NAVER;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.member.usecase.oauth2integration.port.OAuth2NetworkException;
+import wannabe.backend.member.usecase.oauth2integration.port.OAuthErrorInteractor;
 
 @ExtendWith(MockitoExtension.class)
 class OAuthErrorInteractorTest {

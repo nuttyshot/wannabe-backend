@@ -1,5 +1,7 @@
 package wannabe.backend.core.token;
 
+import wannabe.backend.token.LoginToken;
+
 public class FakeLoginTokenFactory {
 
   public static LoginToken create() {

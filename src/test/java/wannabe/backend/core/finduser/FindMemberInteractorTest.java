@@ -1,7 +1,7 @@
 package wannabe.backend.core.finduser;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static wannabe.backend.core.member.Provider.*;
+import static wannabe.backend.member.usecase.signupmember.Provider.*;
 
 import java.time.LocalDate;
 import lombok.val;
@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import wannabe.backend.core.member.FakeMember;
-import wannabe.backend.core.member.Member;
-import wannabe.backend.core.member.MemberRepository;
+import wannabe.backend.infrastructure.member.Member;
+import wannabe.backend.infrastructure.member.MemberRepository;
+import wannabe.backend.member.usecase.findmember.AgeRange;
+import wannabe.backend.member.usecase.findmember.FindMemberInteractor;
 
 @DataJpaTest
 class FindMemberInteractorTest {

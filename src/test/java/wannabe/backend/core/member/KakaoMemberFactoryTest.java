@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.core.finduser.AgeRange;
-import wannabe.backend.core.oauth2.Provider;
-import wannabe.backend.core.oauth2.adapter.OAuth2Member;
+import wannabe.backend.member.usecase.findmember.AgeRange;
+import wannabe.backend.member.usecase.oauth2integration.Provider;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Member;
+import wannabe.backend.member.usecase.signupmember.KakaoMemberFactory;
 
 @ExtendWith(MockitoExtension.class)
 class KakaoMemberFactoryTest {

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import lombok.val;
 import org.junit.jupiter.api.Test;
+import wannabe.backend.member.usecase.findmember.AgeRange;
 
 class AgeRangeTest {
 

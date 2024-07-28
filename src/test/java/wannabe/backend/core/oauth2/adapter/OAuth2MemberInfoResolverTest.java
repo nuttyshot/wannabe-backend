@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static wannabe.backend.core.oauth2.Provider.KAKAO;
-import static wannabe.backend.core.oauth2.Provider.NAVER;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.KAKAO;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.NAVER;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.naming.OperationNotSupportedException;
@@ -15,12 +15,14 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.core.oauth2.OAuth2ArgumentChooserService;
-import wannabe.backend.core.oauth2.OAuth2ArgumentPort;
-import wannabe.backend.core.oauth2.OAuth2ProviderValues;
-import wannabe.backend.core.oauth2.OAuth2ProviderValues.Provider;
-import wannabe.backend.core.oauth2.OAuth2ProviderValues.Registration;
-import wannabe.backend.core.oauth2.port.OAuth2ErrorPort;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentChooserService;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentPort;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Provider;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Registration;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2MemberFactory;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2MemberInfoResolver;
+import wannabe.backend.member.usecase.oauth2integration.port.OAuth2ErrorPort;
 
 /**
  * 아래 링크를 통해 code를 얻고 테스트를 실행해야 합니다. <p>

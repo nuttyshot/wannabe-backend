@@ -1,7 +1,7 @@
 package wannabe.backend.core.oauth2.adapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static wannabe.backend.core.oauth2.Provider.*;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.*;
 
 import java.util.Map;
 import lombok.val;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.core.oauth2.Provider;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2MemberFactory;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2MemberFactoryTest {

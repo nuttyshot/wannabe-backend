@@ -5,19 +5,19 @@ import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.core.member.FakeMember;
-import wannabe.backend.core.member.Member;
-import wannabe.backend.core.member.MemberFactory;
-import wannabe.backend.core.member.MemberFactoryProvider;
-import wannabe.backend.core.member.MemberRepository;
-import wannabe.backend.core.oauth2.Provider;
-import wannabe.backend.core.oauth2.adapter.OAuth2Member;
+import wannabe.backend.infrastructure.member.Member;
+import wannabe.backend.member.usecase.signupmember.MemberFactory;
+import wannabe.backend.member.usecase.signupmember.MemberFactoryProvider;
+import wannabe.backend.infrastructure.member.MemberRepository;
+import wannabe.backend.member.usecase.oauth2integration.Provider;
+import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Member;
+import wannabe.backend.member.usecase.signupmember.SignupMemberInteractor;
 
 @ExtendWith(MockitoExtension.class)
 class SignupMemberInteractorTest {

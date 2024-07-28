@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import lombok.experimental.ExtensionMethod;
 import lombok.val;
 import org.junit.jupiter.api.Test;
+import wannabe.backend.util.date.DateExtension;
 
 @ExtensionMethod(DateExtension.class)
 class DateExtensionTest {

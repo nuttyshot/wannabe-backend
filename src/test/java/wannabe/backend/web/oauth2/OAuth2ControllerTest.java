@@ -3,28 +3,25 @@ package wannabe.backend.web.oauth2;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static wannabe.backend.core.oauth2.Provider.*;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.*;
 
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
 import lombok.val;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.servlet.view.RedirectView;
-import wannabe.backend.core.oauth2.OAuth2ArgumentChooserService;
-import wannabe.backend.core.oauth2.OAuth2ArgumentPort;
-import wannabe.backend.core.oauth2.OAuth2ProviderValues;
-import wannabe.backend.core.oauth2.OAuth2ProviderValues.Provider;
-import wannabe.backend.core.oauth2.OAuth2ProviderValues.Registration;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentChooserService;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentPort;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Provider;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Registration;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2ControllerTest {

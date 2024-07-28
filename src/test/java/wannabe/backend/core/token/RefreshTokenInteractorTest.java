@@ -1,16 +1,13 @@
 package wannabe.backend.core.token;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import io.jsonwebtoken.Jwts;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +18,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import wannabe.backend.config.security.auth.JwtSecurityArgumentGateway;
-import wannabe.backend.core.token.TokenInformation.TokenKey;
+import wannabe.backend.util.date.DateTimeProvider;
+import wannabe.backend.token.RefreshTokenInteractor;
+import wannabe.backend.token.TokenInformation;
+import wannabe.backend.token.TokenInformation.TokenKey;
 
 @ExtendWith(MockitoExtension.class)
 class RefreshTokenInteractorTest {

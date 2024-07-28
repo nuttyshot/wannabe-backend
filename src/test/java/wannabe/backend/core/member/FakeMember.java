@@ -1,12 +1,12 @@
 package wannabe.backend.core.member;
 
-import static wannabe.backend.core.member.Provider.*;
-
 import java.time.LocalDate;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.With;
-import wannabe.backend.core.finduser.AgeRange;
+import wannabe.backend.member.usecase.findmember.AgeRange;
+import wannabe.backend.infrastructure.member.Member;
+import wannabe.backend.member.usecase.signupmember.Provider;
 
 @With
 @Builder

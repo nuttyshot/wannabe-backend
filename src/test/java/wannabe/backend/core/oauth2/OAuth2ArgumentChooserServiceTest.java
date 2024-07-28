@@ -1,8 +1,8 @@
 package wannabe.backend.core.oauth2;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static wannabe.backend.core.oauth2.Provider.KAKAO;
-import static wannabe.backend.core.oauth2.Provider.NAVER;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.KAKAO;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.NAVER;
 
 import javax.naming.OperationNotSupportedException;
 import lombok.val;
@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentChooserService;
+import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentPort;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2ArgumentChooserServiceTest {
