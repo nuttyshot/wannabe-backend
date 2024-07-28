@@ -9,8 +9,8 @@ import lombok.NonNull;
 public record ProductsResponse(@NonNull List<ProductResponse> productResponses) {
 
   @Builder
-  public record ProductResponse(@NonNull LocalDate eventDate,
-                                @NonNull String eventName,
+  public record ProductResponse(@NonNull LocalDate scheduleDate,
+                                @NonNull String scheduleName,
                                 @NonNull String idolMemberName,
                                 @NonNull String productName,
                                 @NonNull List<String> productImageUrls) {
