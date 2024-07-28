@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.intellij.lang.annotations.Pattern;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wannabe.backend.core.product.entity.ProductType;
+import wannabe.backend.core.product.usecase.ProductAddRequest;
+import wannabe.backend.core.product.usecase.ProductAddRequest.IdolMember;
+import wannabe.backend.core.product.usecase.ProductAddRequest.Product;
+import wannabe.backend.core.product.usecase.ProductAddRequest.Schedule;
+import wannabe.backend.core.product.usecase.ProductAddUseCase;
 
 @Tag(name = "상품")
 @RestController
@@ -20,9 +26,34 @@ import wannabe.backend.core.product.entity.ProductType;
 @RequiredArgsConstructor
 public class ProductAddController {
 
+  private final ProductAddUseCase useCase;
+
   @Operation(summary = "상품 추가")
   @PostMapping
   public void add(@Valid @RequestBody Body body) {
+    useCase.addProduct(request(body));
+  }
+
+  private ProductAddRequest request(@NonNull Body body) {
+    return ProductAddRequest.builder()
+        .schedule(Schedule.builder()
+            .date(body.scheduleDate().date())
+            .name(body.scheduleDate().name())
+            .build())
+        .idolMember(IdolMember.builder()
+            .name(body.scheduleDate().idolMemberName())
+            .build())
+        .product(Product.builder()
+            .name(body.product().name())
+            .brand(body.product().brand())
+            .type(body.product().type())
+            .salesLink(body.product().salesLink())
+            .style(body.product().style())
+            .price(body.product().price())
+            .color(body.product().color())
+            .imageUrls(body.product().imageUrls())
+            .build())
+        .build();
   }
 
   record Body(Schedule scheduleDate,
