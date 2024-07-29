@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.NonNull;
 import wannabe.backend.product.entity.ProductType;
+import wannabe.backend.schedule.usecase.addschedule.AddScheduleRequest;
 
 @Builder
 public record ProductAddRequest(@NonNull Schedule schedule,
@@ -34,4 +35,7 @@ public record ProductAddRequest(@NonNull Schedule schedule,
 
   }
 
+  public AddScheduleRequest toAddScheduleRequest() {
+    return new AddScheduleRequest();
+  }
 }
