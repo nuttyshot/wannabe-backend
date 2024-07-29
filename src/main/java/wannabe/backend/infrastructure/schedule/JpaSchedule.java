@@ -20,7 +20,7 @@ import wannabe.backend.infrastructure.common.Audit;
 @Getter
 @ToString
 @Table(name = "schedule")
-@Builder(access = PACKAGE)
+@Builder
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity

@@ -14,13 +14,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import wannabe.backend.infrastructure.idol.idolgroup.JpaIdolGroup;
 
+@Getter
 @ToString
 @Table(name = "idol_member")
-@Builder(access = PACKAGE)
+@Builder
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity

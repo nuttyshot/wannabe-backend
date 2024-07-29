@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.idol.entity.IdolMember;
 import wannabe.backend.idol.entity.IdolMemberId;
 import wannabe.backend.idol.usecase.findidolmember.FindIdolMemberUseCase;
+import wannabe.backend.product.entity.Color;
 import wannabe.backend.product.entity.Product;
 import wannabe.backend.product.entity.ProductType;
 import wannabe.backend.product.usecase.addproduct.ProductAddRequest.Schedule;
@@ -62,8 +63,9 @@ class ProductAddInteractorTest {
         .idolMember(ProductAddRequest.IdolMember.builder().name("MOCK_IDOL_MEMBER_NAME").build())
         .product(ProductAddRequest.Product.builder()
             .name("MOCK_PRODUCT_NAME")
-            .type(ProductType.TOP)
-            .color("MOCK_COLOR")
+            .price(10000)
+            .productType(ProductType.TOP)
+            .color(Color.BLACK)
             .imageUrls(List.of())
             .build())
         .build();

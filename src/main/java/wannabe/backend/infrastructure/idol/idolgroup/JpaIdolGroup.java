@@ -16,7 +16,7 @@ import lombok.ToString;
 
 @ToString
 @Table(name = "idol_group")
-@Builder(access = PACKAGE)
+@Builder
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity

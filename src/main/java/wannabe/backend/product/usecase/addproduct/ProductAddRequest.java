@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
 import lombok.NonNull;
+import wannabe.backend.product.entity.Color;
 import wannabe.backend.product.entity.ProductType;
+import wannabe.backend.product.entity.StyleType;
 import wannabe.backend.schedule.usecase.addschedule.AddScheduleRequest;
 
 @Builder
@@ -26,11 +28,11 @@ public record ProductAddRequest(@NonNull Schedule schedule,
   @Builder
   public record Product(@NonNull String name,
                         String brand,
-                        @NonNull ProductType type,
+                        @NonNull ProductType productType,
                         String salesLink,
-                        String style,
+                        StyleType styleType,
                         Integer price,
-                        @NonNull String color,
+                        @NonNull Color color,
                         @NonNull List<String> imageUrls) {
 
   }

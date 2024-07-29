@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import wannabe.backend.product.entity.Color;
 import wannabe.backend.product.entity.ProductType;
+import wannabe.backend.product.entity.StyleType;
 import wannabe.backend.product.usecase.addproduct.ProductAddRequest;
 import wannabe.backend.product.usecase.addproduct.ProductAddRequest.IdolMember;
 import wannabe.backend.product.usecase.addproduct.ProductAddRequest.Product;
@@ -46,9 +48,9 @@ public class ProductAddController {
         .product(Product.builder()
             .name(body.product().name())
             .brand(body.product().brand())
-            .type(body.product().type())
+            .productType(body.product().type())
             .salesLink(body.product().salesLink())
-            .style(body.product().style())
+            .styleType(body.product().styleType())
             .price(body.product().price())
             .color(body.product().color())
             .imageUrls(body.product().imageUrls())
@@ -78,10 +80,10 @@ public class ProductAddController {
         ProductType type,
         String seller,
         String salesLink,
-        String style,
+        StyleType styleType,
         Integer price,
         @NotNull(message = "상품 색상은 필수 입력 값입니다.")
-        String color,
+        Color color,
         @NotNull(message = "상품 이미지 URL은 필수 입력 값입니다.")
         List<String> imageUrls) {
 

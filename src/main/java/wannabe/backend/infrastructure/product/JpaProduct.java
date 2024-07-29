@@ -12,21 +12,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import wannabe.backend.infrastructure.common.Audit;
 import wannabe.backend.infrastructure.idol.idolmember.JpaIdolMember;
 import wannabe.backend.infrastructure.schedule.JpaSchedule;
+import wannabe.backend.product.entity.Color;
+import wannabe.backend.product.entity.Product;
 import wannabe.backend.product.entity.ProductType;
+import wannabe.backend.product.entity.StyleType;
 
+@Getter
 @ToString
 @Table(name = "product")
-@Builder(access = PACKAGE)
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
@@ -40,7 +44,7 @@ public class JpaProduct extends Audit {
   @Column(name = "name", length = 100, nullable = false)
   private String name;
 
-  @OneToOne(fetch = LAZY)
+  @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "schedule_id", nullable = false)
   private JpaSchedule schedule;
 
@@ -48,11 +52,11 @@ public class JpaProduct extends Audit {
   private int price;
 
   @Enumerated(STRING)
-  @Column(name = "type", length = 50, nullable = false)
+  @Column(name = "productType", length = 50, nullable = false)
   private ProductType productType;
 
-  @Column(name = "purchase_link", length = 255)
-  private String purchaseLink;
+  @Column(name = "sales_link", length = 255)
+  private String salesLink;
 
   @Enumerated(STRING)
   @Column(name = "color", length = 50, nullable = false)
@@ -62,7 +66,22 @@ public class JpaProduct extends Audit {
   @Column(name = "style_type", length = 50)
   private StyleType styleType;
 
-  @OneToOne(fetch = LAZY)
+  @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "idol_member_id", nullable = false)
   private JpaIdolMember idolMember;
+
+  public JpaProduct(@NonNull Product product) {
+    this.name = product.name();
+    this.schedule = JpaSchedule.builder().id(product.scheduleId().id()).build();
+    this.price = product.price();
+    this.productType = product.productType();
+    this.salesLink = product.salesLink();
+    this.color = product.color();
+    this.styleType = product.styleType();
+    this.idolMember = JpaIdolMember.builder().id(product.idolMemberId().id()).build();
+  }
+
+  public JpaProduct(Long id) {
+    this.id = id;
+  }
 }

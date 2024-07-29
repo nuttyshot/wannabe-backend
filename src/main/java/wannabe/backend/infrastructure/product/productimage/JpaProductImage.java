@@ -1,6 +1,6 @@
 package wannabe.backend.infrastructure.product.productimage;
 
-import static jakarta.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -15,8 +15,11 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import wannabe.backend.infrastructure.product.JpaProduct;
+import wannabe.backend.product.entity.ImageSequence;
+import wannabe.backend.product.entity.ImageUrl;
 
 @ToString
 @Table(name = "product_image")
@@ -39,5 +42,12 @@ public class JpaProductImage {
   private String url;
 
   @Column(name = "sequence", nullable = false)
-  private int sequence;
+  private long sequence;
+
+  public JpaProductImage(@NonNull Long productId, @NonNull ImageSequence sequence,
+      @NonNull ImageUrl url) {
+    this.product = new JpaProduct(productId);
+    this.sequence = sequence.sequence();
+    this.url = url.url();
+  }
 }
