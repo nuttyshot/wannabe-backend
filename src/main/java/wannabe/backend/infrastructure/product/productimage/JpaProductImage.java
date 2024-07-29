@@ -1,4 +1,4 @@
-package wannabe.backend.infrastructure.idol.idolmember;
+package wannabe.backend.infrastructure.product.productimage;
 
 import static jakarta.persistence.FetchType.*;
 import static lombok.AccessLevel.PACKAGE;
@@ -16,15 +16,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import wannabe.backend.infrastructure.idol.idolgroup.IdolGroup;
+import wannabe.backend.infrastructure.product.JpaProduct;
 
 @ToString
-@Table(name = "idol_member")
+@Table(name = "product_image")
 @Builder(access = PACKAGE)
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class IdolMember {
+public class JpaProductImage {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +32,12 @@ public class IdolMember {
   private Long id;
 
   @ManyToOne(fetch = LAZY)
-  @JoinColumn(name = "idol_group_id", nullable = false)
-  private IdolGroup group;
+  @JoinColumn(name = "product_id", nullable = false)
+  private JpaProduct product;
 
-  @Column(name = "name", length = 100, nullable = false)
-  private String name;
+  @Column(name = "url", length = 255, nullable = false)
+  private String url;
+
+  @Column(name = "sequence", nullable = false)
+  private int sequence;
 }

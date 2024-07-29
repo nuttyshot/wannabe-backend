@@ -20,7 +20,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import wannabe.backend.infrastructure.common.Audit;
-import wannabe.backend.infrastructure.idol.idolmember.IdolMember;
+import wannabe.backend.infrastructure.idol.idolmember.JpaIdolMember;
 import wannabe.backend.product.entity.ProductType;
 
 @ToString
@@ -29,7 +29,7 @@ import wannabe.backend.product.entity.ProductType;
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class Product extends Audit {
+public class JpaProduct extends Audit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,5 +62,5 @@ public class Product extends Audit {
 
   @OneToOne(fetch = LAZY)
   @JoinColumn(name = "idol_member_id", nullable = false)
-  private IdolMember idolMember;
+  private JpaIdolMember idolMember;
 }
