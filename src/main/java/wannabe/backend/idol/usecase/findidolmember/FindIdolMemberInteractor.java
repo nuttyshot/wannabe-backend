@@ -10,8 +10,11 @@ import wannabe.backend.idol.entity.IdolMember;
 @RequiredArgsConstructor
 public class FindIdolMemberInteractor implements FindIdolMemberUseCase {
 
+  private final FindIdolMemberDsGateway gateway;
+
   @Override
   public IdolMember find(@NonNull String name) throws NoSuchElementException {
-    return null;
+    return gateway.findByName(name)
+        .orElseThrow(() -> new NoSuchElementException("아이돌 멤버를 찾을 수 없습니다 : " + name));
   }
 }
