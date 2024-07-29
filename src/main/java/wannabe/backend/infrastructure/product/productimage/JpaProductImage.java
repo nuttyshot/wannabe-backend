@@ -46,7 +46,7 @@ public class JpaProductImage {
 
   public JpaProductImage(@NonNull Long productId, @NonNull ImageSequence sequence,
       @NonNull ImageUrl url) {
-    this.product = new JpaProduct(productId);
+    this.product = JpaProduct.builder().id(productId).build();
     this.sequence = sequence.sequence();
     this.url = url.url();
   }

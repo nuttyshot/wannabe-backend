@@ -48,7 +48,8 @@ public class ProductAddController {
         .product(Product.builder()
             .name(body.product().name())
             .brand(body.product().brand())
-            .productType(body.product().type())
+            .productType(body.product().productType())
+            .seller(body.product().seller())
             .salesLink(body.product().salesLink())
             .styleType(body.product().styleType())
             .price(body.product().price())
@@ -77,7 +78,7 @@ public class ProductAddController {
         String name,
         String brand,
         @NotNull(message = "상품 타입은 필수 입력 값입니다. [TOP, BOTTOM, SHOES, OUTER, HAT, BAG, ACC]")
-        ProductType type,
+        ProductType productType,
         String seller,
         String salesLink,
         StyleType styleType,

@@ -20,14 +20,16 @@ public class ProductFactory {
 
     return Product.builder()
         .name(product.name())
-        .scheduleId(scheduleId)
-        .price(product.price())
+        .brand(product.brand())
         .productType(product.productType())
+        .seller(product.seller())
         .salesLink(product.salesLink())
-        .color(product.color())
         .styleType(product.styleType())
-        .idolMemberId(idolMemberId)
+        .price(product.price())
+        .color(product.color())
         .images(images(product.imageUrls()))
+        .scheduleId(scheduleId)
+        .idolMemberId(idolMemberId)
         .build();
   }
 

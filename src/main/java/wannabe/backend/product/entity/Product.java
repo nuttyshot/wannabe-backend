@@ -7,13 +7,15 @@ import wannabe.backend.schedule.entity.ScheduleId;
 
 @Builder
 public record Product(@NonNull String name,
-                      @NonNull ScheduleId scheduleId,
-                      int price,
+                      String brand,
                       @NonNull ProductType productType,
+                      String seller,
                       String salesLink,
-                      @NonNull Color color,
                       StyleType styleType,
-                      @NonNull IdolMemberId idolMemberId,
-                      @NonNull ProductImages images) {
+                      Integer price,
+                      @NonNull Color color,
+                      @NonNull ProductImages images,
+                      @NonNull ScheduleId scheduleId,
+                      @NonNull IdolMemberId idolMemberId) {
 
 }

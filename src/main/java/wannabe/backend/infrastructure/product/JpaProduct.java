@@ -2,7 +2,6 @@ package wannabe.backend.infrastructure.product;
 
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
 import jakarta.persistence.Column;
@@ -31,7 +30,8 @@ import wannabe.backend.product.entity.StyleType;
 @Getter
 @ToString
 @Table(name = "product")
-@AllArgsConstructor(access = PACKAGE)
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 @Entity
 public class JpaProduct extends Audit {
@@ -44,16 +44,22 @@ public class JpaProduct extends Audit {
   @Column(name = "name", length = 100, nullable = false)
   private String name;
 
+  @Column(name = "brand", length = 50)
+  private String brand;
+
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "schedule_id", nullable = false)
   private JpaSchedule schedule;
 
-  @Column(name = "price", nullable = false)
-  private int price;
+  @Column(name = "price")
+  private Integer price;
 
   @Enumerated(STRING)
   @Column(name = "productType", length = 50, nullable = false)
   private ProductType productType;
+
+  @Column(name = "seller", length = 50)
+  private String seller;
 
   @Column(name = "sales_link", length = 255)
   private String salesLink;
@@ -79,9 +85,5 @@ public class JpaProduct extends Audit {
     this.color = product.color();
     this.styleType = product.styleType();
     this.idolMember = JpaIdolMember.builder().id(product.idolMemberId().id()).build();
-  }
-
-  public JpaProduct(Long id) {
-    this.id = id;
   }
 }
