@@ -1,7 +1,7 @@
 package wannabe.backend.member.usecase.oauth2integration;
 
-import static java.nio.charset.StandardCharsets.*;
-import static org.assertj.core.api.Assertions.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.net.URLEncoder;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2Formatter;
 import wannabe.backend.member.usecase.oauth2integration.redirectpages.FrontBaseUrlArgumentGateway;
 
 @ExtendWith(MockitoExtension.class)

@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.member.usecase.findmember.AgeRange;
 import wannabe.backend.member.usecase.oauth2integration.Provider;
 import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Member;
-import wannabe.backend.member.usecase.signupmember.KakaoMemberFactory;
 
 @ExtendWith(MockitoExtension.class)
 class KakaoMemberFactoryTest {
@@ -30,7 +29,7 @@ class KakaoMemberFactoryTest {
         .ageRange("20~29")
         .build());
     // then
-    assertThat(member.getBirthday()).isEqualTo(LocalDate.of(2020, 1, 1));
+    assertThat(member.getBirthday().getBirthday()).isEqualTo(LocalDate.of(2020, 1, 1));
     assertThat(member.getAgeRange()).isEqualTo(AgeRange.TWENTIES);
   }
 }

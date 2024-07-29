@@ -20,8 +20,6 @@ import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentPort;
 import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues;
 import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Provider;
 import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Registration;
-import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2MemberFactory;
-import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2MemberInfoResolver;
 import wannabe.backend.member.usecase.oauth2integration.port.OAuth2ErrorPort;
 
 /**

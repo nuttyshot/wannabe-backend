@@ -1,37 +1,33 @@
 package wannabe.backend.member.findmember;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static wannabe.backend.member.usecase.signupmember.Provider.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
+import java.util.Optional;
 import lombok.val;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import wannabe.backend.member.usecase.signupmember.FakeMember;
-import wannabe.backend.infrastructure.member.Member;
-import wannabe.backend.infrastructure.member.MemberRepository;
-import wannabe.backend.member.usecase.findmember.AgeRange;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.member.entity.Member;
+import wannabe.backend.member.usecase.findmember.FindMemberDsGateway;
 import wannabe.backend.member.usecase.findmember.FindMemberInteractor;
 
-@DataJpaTest
+@ExtendWith(MockitoExtension.class)
 class FindMemberInteractorTest {
 
+  @InjectMocks
   private FindMemberInteractor interactor;
 
-  @Autowired
-  private MemberRepository memberRepository;
-
-  @BeforeEach
-  void setUp() {
-    interactor = new FindMemberInteractor(memberRepository);
-  }
+  @Mock
+  private FindMemberDsGateway gateway;
 
   @Test
   void 이메일로_회원_찾기() {
     // given
-    memberRepository.save(member());
+    when(gateway.findByEmail(any())).thenReturn(Optional.of(member()));
     // when
     val findMember = interactor.findByEmail("MOCK_EMAIL").get();
     // then
@@ -39,13 +35,6 @@ class FindMemberInteractorTest {
   }
 
   private static Member member() {
-    return FakeMember.builder()
-        .email("MOCK_EMAIL")
-        .birthday(LocalDate.MIN)
-        .nickname("MOCK_NICKNAME")
-        .name("MOCK_NAME")
-        .ageRange(AgeRange.TEENS)
-        .provider(KAKAO)
-        .build().toMember();
+    return Member.builder().build();
   }
 }

@@ -10,8 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.infrastructure.member.Member;
-import wannabe.backend.infrastructure.member.MemberRepository;
+import wannabe.backend.member.entity.Member;
+import wannabe.backend.member.entity.MemberFactory;
+import wannabe.backend.member.entity.MemberId;
 import wannabe.backend.member.usecase.oauth2integration.Provider;
 import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Member;
 
@@ -22,7 +23,7 @@ class SignupMemberInteractorTest {
   private SignupMemberInteractor interactor;
 
   @Mock
-  private MemberRepository memberRepository;
+  private SignupMemberDsGateway gateway;
 
   @Mock
   private MemberFactoryProvider memberFactoryProvider;
@@ -35,30 +36,25 @@ class SignupMemberInteractorTest {
     // given
     when(memberFactoryProvider.getMemberFactory(any())).thenReturn(memberFactory);
     when(memberFactory.create(any())).thenReturn(FakeFactory.memberBeforeSave());
-    when(memberRepository.save(any())).thenReturn(FakeFactory.memberAfterSave());
+    when(gateway.save(any())).thenReturn(FakeFactory.memberAfterSave());
     // when
     interactor.signup(FakeFactory.oauth2Member());
     // then
     verify(memberFactoryProvider, only()).getMemberFactory(any());
     verify(memberFactory, only()).create(any());
-    verify(memberRepository, only()).save(any());
+    verify(gateway, only()).save(any());
   }
 
   private static class FakeFactory {
 
     private static Member memberBeforeSave() {
-      return FakeMember.builder()
-          .email("MOCK_EMAIL")
-          .build()
-          .toMember();
+      return Member.builder().build();
     }
 
     private static Member memberAfterSave() {
-      return FakeMember.builder()
-          .id(1L)
-          .email("MOCK_EMAIL")
-          .build()
-          .toMember();
+      return Member.builder()
+          .id(new MemberId(1L))
+          .build();
     }
 
     private static OAuth2Member oauth2Member() {

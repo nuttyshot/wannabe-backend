@@ -21,15 +21,15 @@ import wannabe.backend.member.usecase.findmember.AgeRange;
 import wannabe.backend.infrastructure.common.Audit;
 import wannabe.backend.member.usecase.signupmember.Provider;
 
+@Getter
 @ToString
 @Table(name = "member")
 @Builder
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class Member extends Audit {
+public class JpaMember extends Audit {
 
-  @Getter
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)

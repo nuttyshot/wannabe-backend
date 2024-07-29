@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.member.usecase.oauth2integration.port.OAuth2NetworkException;
-import wannabe.backend.member.usecase.oauth2integration.port.OAuthErrorInteractor;
 
 @ExtendWith(MockitoExtension.class)
 class OAuthErrorInteractorTest {

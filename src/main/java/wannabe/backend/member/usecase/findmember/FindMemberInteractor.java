@@ -5,18 +5,17 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import wannabe.backend.infrastructure.member.Member;
-import wannabe.backend.infrastructure.member.MemberRepository;
+import wannabe.backend.member.entity.Member;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class FindMemberInteractor implements FindMemberPort {
 
-  private final MemberRepository memberRepository;
+  private final FindMemberDsGateway gateway;
 
   @Override
   public Optional<Member> findByEmail(@NonNull String email) {
-    return memberRepository.findByEmail(email);
+    return gateway.findByEmail(email);
   }
 }

@@ -4,7 +4,7 @@ import java.util.Optional;
 import lombok.NonNull;
 import wannabe.backend.member.entity.Member;
 
-public interface FindMemberPort {
+public interface FindMemberDsGateway {
 
   Optional<Member> findByEmail(@NonNull String email);
 }

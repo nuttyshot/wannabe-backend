@@ -4,6 +4,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
+import wannabe.backend.member.entity.MemberId;
 import wannabe.backend.member.usecase.findmember.FindMemberPort;
 import wannabe.backend.member.usecase.oauth2integration.OAuth2Presenter;
 import wannabe.backend.member.usecase.signupmember.SignupMemberPort;
@@ -36,12 +37,12 @@ public class OAuth2Interactor implements OAuth2Adapter {
     return mainPage(id);
   }
 
-  private OAuth2Response joined(long id) {
+  private OAuth2Response joined(@NonNull MemberId id) {
     return mainPage(id);
   }
 
-  private OAuth2Response mainPage(long id) {
-    val loginToken = loginTokenPort.getLoginToken(new TokenInformation(id));
+  private OAuth2Response mainPage(@NonNull MemberId id) {
+    val loginToken = loginTokenPort.getLoginToken(new TokenInformation(id.id()));
     return presenter.mainPage(loginToken.accessToken(), loginToken.refreshToken(), loginToken.expiredAt());
   }
 }

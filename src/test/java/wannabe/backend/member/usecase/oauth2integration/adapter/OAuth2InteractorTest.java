@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static wannabe.backend.member.usecase.oauth2integration.Provider.*;
+import static wannabe.backend.member.usecase.oauth2integration.Provider.KAKAO;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.member.entity.MemberId;
 import wannabe.backend.member.usecase.findmember.FindMemberPort;
 import wannabe.backend.member.usecase.oauth2integration.OAuth2Presenter;
 import wannabe.backend.member.usecase.signupmember.SignupMemberPort;
@@ -46,6 +47,7 @@ class OAuth2InteractorTest {
     // given
     when(oAuth2MemberInfoGateway.resolve(any())).thenReturn(FakeOAuth2MemberFactory.nonMember());
     when(findMemberPort.findByEmail(anyString())).thenReturn(Optional.empty());
+    when(signupMemberPort.signup(any())).thenReturn(new MemberId(1L));
     when(loginTokenPort.getLoginToken(any())).thenReturn(FakeLoginTokenFactory.create());
     // when
     interactor.success(FakeOAuth2RequestFactory.create());

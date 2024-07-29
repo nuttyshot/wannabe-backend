@@ -30,7 +30,7 @@ class NaverMemberFactoryTest {
         .ageRange("20-29")
         .build());
     // then
-    assertThat(member.getBirthday()).isEqualTo(LocalDate.of(2020, 1, 1));
+    assertThat(member.getBirthday().getBirthday()).isEqualTo(LocalDate.of(2020, 1, 1));
     assertThat(member.getAgeRange()).isEqualTo(AgeRange.TWENTIES);
   }
 }
