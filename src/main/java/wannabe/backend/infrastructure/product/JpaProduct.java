@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import wannabe.backend.infrastructure.common.Audit;
 import wannabe.backend.infrastructure.idol.idolmember.JpaIdolMember;
+import wannabe.backend.infrastructure.schedule.JpaSchedule;
 import wannabe.backend.product.entity.ProductType;
 
 @ToString
@@ -39,8 +40,9 @@ public class JpaProduct extends Audit {
   @Column(name = "name", length = 100, nullable = false)
   private String name;
 
-  @Column(name = "wearing_date", nullable = false)
-  private LocalDate wearingDate;
+  @OneToOne(fetch = LAZY)
+  @JoinColumn(name = "schedule_id", nullable = false)
+  private JpaSchedule schedule;
 
   @Column(name = "price", nullable = false)
   private int price;
