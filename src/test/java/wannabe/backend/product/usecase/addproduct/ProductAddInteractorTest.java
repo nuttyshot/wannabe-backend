@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +56,7 @@ class ProductAddInteractorTest {
   private ProductAddRequest request() {
     return ProductAddRequest.builder()
         .schedule(Schedule.builder()
-            .date(LocalDate.MIN)
+            .dateTime(LocalDateTime.MIN)
             .name("MOCK_SCHEDULE_NAME")
             .build())
         .idolMember(ProductAddRequest.IdolMember.builder().name("MOCK_IDOL_MEMBER_NAME").build())

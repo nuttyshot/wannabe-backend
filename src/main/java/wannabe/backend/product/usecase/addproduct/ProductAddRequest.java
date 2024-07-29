@@ -1,6 +1,6 @@
 package wannabe.backend.product.usecase.addproduct;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
 import lombok.NonNull;
@@ -13,7 +13,7 @@ public record ProductAddRequest(@NonNull Schedule schedule,
                                 @NonNull Product product) {
 
   @Builder
-  public record Schedule(@NonNull LocalDate date,
+  public record Schedule(@NonNull LocalDateTime dateTime,
                          @NonNull String name) {
 
   }
@@ -36,6 +36,9 @@ public record ProductAddRequest(@NonNull Schedule schedule,
   }
 
   public AddScheduleRequest toAddScheduleRequest() {
-    return new AddScheduleRequest();
+    return AddScheduleRequest.builder()
+        .name(this.schedule.name)
+        .dateTime(this.schedule.dateTime)
+        .build();
   }
 }

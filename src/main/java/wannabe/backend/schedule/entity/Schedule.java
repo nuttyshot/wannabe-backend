@@ -1,5 +1,12 @@
 package wannabe.backend.schedule.entity;
 
-public record Schedule(ScheduleId id) {
+import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.NonNull;
+
+@Builder
+public record Schedule(ScheduleId id,
+                       @NonNull String name,
+                       @NonNull LocalDateTime dateTime) {
 
 }

@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class ProductAddController {
   private ProductAddRequest request(@NonNull Body body) {
     return ProductAddRequest.builder()
         .schedule(Schedule.builder()
-            .date(body.scheduleDate().date())
+            .dateTime(body.scheduleDate().dateTime())
             .name(body.scheduleDate().name())
             .build())
         .idolMember(IdolMember.builder()
@@ -61,7 +61,7 @@ public class ProductAddController {
 
     record Schedule(
         @NotNull(message = "스케쥴 날짜는 필수 입력 값입니다.")
-        LocalDate date,
+        LocalDateTime dateTime,
         @NotNull(message = "스케쥴 이름은 필수 입력 값입니다.")
         String name,
         @NotNull(message = "아이돌 멤버 이름은 필수 입력 값입니다. [민지, 하니, 혜인, 혜린, 다니엘]")
