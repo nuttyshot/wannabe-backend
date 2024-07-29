@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import wannabe.backend.member.usecase.findmember.FindMemberPort;
 import wannabe.backend.member.usecase.oauth2integration.OAuth2Presenter;
 import wannabe.backend.member.usecase.signupmember.SignupMemberPort;
-import wannabe.backend.token.TokenInformation;
-import wannabe.backend.token.LoginTokenPort;
+import wannabe.backend.token.usecase.getlogintoken.TokenInformation;
+import wannabe.backend.token.usecase.getlogintoken.LoginTokenPort;
 
 @Service
 @RequiredArgsConstructor

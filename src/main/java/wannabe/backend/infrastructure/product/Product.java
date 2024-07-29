@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import wannabe.backend.infrastructure.common.Audit;
 import wannabe.backend.infrastructure.idol.idolmember.IdolMember;
+import wannabe.backend.product.entity.ProductType;
 
 @ToString
 @Table(name = "product")

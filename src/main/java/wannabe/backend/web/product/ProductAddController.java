@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.core.product.entity.ProductType;
-import wannabe.backend.core.product.usecase.ProductAddRequest;
-import wannabe.backend.core.product.usecase.ProductAddRequest.IdolMember;
-import wannabe.backend.core.product.usecase.ProductAddRequest.Product;
-import wannabe.backend.core.product.usecase.ProductAddRequest.Schedule;
-import wannabe.backend.core.product.usecase.ProductAddUseCase;
+import wannabe.backend.product.entity.ProductType;
+import wannabe.backend.product.usecase.addproduct.ProductAddRequest;
+import wannabe.backend.product.usecase.addproduct.ProductAddRequest.IdolMember;
+import wannabe.backend.product.usecase.addproduct.ProductAddRequest.Product;
+import wannabe.backend.product.usecase.addproduct.ProductAddRequest.Schedule;
+import wannabe.backend.product.usecase.addproduct.ProductAddUseCase;
 
 @Tag(name = "상품")
 @RestController
