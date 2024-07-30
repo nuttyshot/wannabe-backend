@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
@@ -21,6 +22,7 @@ import wannabe.backend.infrastructure.product.JpaProduct;
 import wannabe.backend.product.entity.ImageSequence;
 import wannabe.backend.product.entity.ImageUrl;
 
+@Getter
 @ToString
 @Table(name = "product_image")
 @Builder(access = PACKAGE)
