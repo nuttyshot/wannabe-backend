@@ -19,6 +19,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +33,18 @@ public class SecurityConfig {
     authenticationProvider.setUserDetailsService(userDetailsService());
     authenticationProvider.setPasswordEncoder(passwordEncoder());
     return authenticationProvider;
+  }
+
+  @Bean
+  public CorsConfigurationSource corsConfiguration() {
+    val corsConfiguration = new CorsConfiguration();
+    corsConfiguration.setAllowedOrigins(List.of("*"));
+    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+    corsConfiguration.setAllowedHeaders(List.of("*"));
+
+    val source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", corsConfiguration);
+    return source;
   }
 
   private UserDetailsService userDetailsService() {
