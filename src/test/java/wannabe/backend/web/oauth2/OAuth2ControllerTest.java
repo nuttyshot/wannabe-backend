@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static wannabe.backend.member.usecase.oauth2integration.Provider.*;
+import static wannabe.backend.member.domain.Provider.*;
 
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
@@ -17,11 +17,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentChooserService;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentPort;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Provider;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2ProviderValues.Registration;
+import wannabe.backend.oauth2.interactor.OAuth2ArgumentChooserService;
+import wannabe.backend.oauth2.configuration.OAuth2ArgumentPort;
+import wannabe.backend.member.domain.OAuth2ProviderValues;
+import wannabe.backend.member.domain.OAuth2ProviderValues.Provider;
+import wannabe.backend.member.domain.OAuth2ProviderValues.Registration;
 
 @ExtendWith(MockitoExtension.class)
 class OAuth2ControllerTest {

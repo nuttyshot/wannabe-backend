@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
-import wannabe.backend.member.usecase.oauth2integration.OAuth2ArgumentChooserService;
-import wannabe.backend.member.usecase.oauth2integration.Provider;
+import wannabe.backend.oauth2.interactor.OAuth2ArgumentChooserService;
+import wannabe.backend.member.domain.Provider;
 
 @Hidden
 @RestController

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.test.web.servlet.MockMvc;
 import wannabe.backend.config.security.SecurityConfig;
-import wannabe.backend.product.usecase.findproduct.FindProductUseCase;
+import wannabe.backend.product.usecase.FindProductUseCase;
 
 @WebMvcTest(FindProductController.class)
 @Import(SecurityConfig.class)

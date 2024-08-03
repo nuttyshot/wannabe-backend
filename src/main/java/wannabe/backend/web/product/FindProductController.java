@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.product.usecase.findproduct.FindProductResponse;
-import wannabe.backend.product.usecase.findproduct.FindProductUseCase;
+import wannabe.backend.product.dto.FindProductResponse;
+import wannabe.backend.product.usecase.FindProductUseCase;
 
 @Tag(name = "상품")
 @RestController

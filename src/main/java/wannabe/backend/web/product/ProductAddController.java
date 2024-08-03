@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.product.entity.Color;
-import wannabe.backend.product.entity.ProductType;
-import wannabe.backend.product.entity.StyleType;
-import wannabe.backend.product.usecase.addproduct.ProductAddRequest;
-import wannabe.backend.product.usecase.addproduct.ProductAddRequest.IdolMember;
-import wannabe.backend.product.usecase.addproduct.ProductAddRequest.Product;
-import wannabe.backend.product.usecase.addproduct.ProductAddRequest.Schedule;
-import wannabe.backend.product.usecase.addproduct.ProductAddUseCase;
+import wannabe.backend.product.domain.Color;
+import wannabe.backend.product.domain.ProductType;
+import wannabe.backend.product.domain.StyleType;
+import wannabe.backend.product.dto.AddProductRequest;
+import wannabe.backend.product.dto.AddProductRequest.IdolMember;
+import wannabe.backend.product.dto.AddProductRequest.Product;
+import wannabe.backend.product.dto.AddProductRequest.Schedule;
+import wannabe.backend.product.usecase.ProductAddUseCase;
 
 @Tag(name = "상품")
 @RestController
@@ -36,8 +36,8 @@ public class ProductAddController {
     useCase.addProduct(request(body));
   }
 
-  private ProductAddRequest request(@NonNull Body body) {
-    return ProductAddRequest.builder()
+  private AddProductRequest request(@NonNull Body body) {
+    return AddProductRequest.builder()
         .schedule(Schedule.builder()
             .dateTime(body.scheduleDate().dateTime())
             .name(body.scheduleDate().name())

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.member.usecase.oauth2integration.Provider;
-import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Adapter;
-import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Request;
+import wannabe.backend.member.domain.Provider;
+import wannabe.backend.oauth2.usecase.OAuth2RedirectUseCase;
+import wannabe.backend.member.domain.OAuth2Request;
 
 @Hidden
 @RestController
@@ -19,7 +19,7 @@ import wannabe.backend.member.usecase.oauth2integration.adapter.OAuth2Request;
 @RequiredArgsConstructor
 public class OAuth2CallbackController {
 
-  private final OAuth2Adapter oAuth2Adapter;
+  private final OAuth2RedirectUseCase oAuth2RedirectUseCase;
 
   /**
    * OAuth2 성공 후 Resource Server 로 부터 받은 사용자 정보를 쿠키에 담은 후 적절한 곳으로 redirect 시킨다.
@@ -38,7 +38,7 @@ public class OAuth2CallbackController {
         .state(state)
         .build();
 
-    val oAuth2Response = oAuth2Adapter.success(oAuth2Request);
+    val oAuth2Response = oAuth2RedirectUseCase.success(oAuth2Request);
     response.sendRedirect(oAuth2Response.redirectView().getUrl());
   }
 }
