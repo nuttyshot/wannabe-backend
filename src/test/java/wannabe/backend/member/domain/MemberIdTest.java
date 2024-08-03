@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class MemberIdTest {
 
   @Test
-  void MemberId는_값이_있다면_1_이상_이어야_한다() {
+  void MemberId는_1_이상_이어야_한다() {
     // given
     val value = 1L;
     // when
