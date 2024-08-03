@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import wannabe.backend.member.domain.AgeRange;
 import wannabe.backend.member.domain.Provider;
-import wannabe.backend.member.repository.JpaMember;
-import wannabe.backend.member.repository.JpaMemberRepository;
+import wannabe.backend.member.repository.MemberEntity;
+import wannabe.backend.member.repository.MemberRepository;
 
 @DataJpaTest
 class FindMemberDataMapperTest {
@@ -19,7 +19,7 @@ class FindMemberDataMapperTest {
   private FindMemberDataMapper mapper;
 
   @Autowired
-  private JpaMemberRepository repository;
+  private MemberRepository repository;
 
   @BeforeEach
   void setUp() {
@@ -36,8 +36,8 @@ class FindMemberDataMapperTest {
     assertThat(findMember).isNotNull();
   }
 
-  private static JpaMember member() {
-    return JpaMember.builder()
+  private static MemberEntity member() {
+    return MemberEntity.builder()
         .email("MOCK_EMAIL")
         .birthday(LocalDate.MIN)
         .nickname("MOCK_NICKNAME")

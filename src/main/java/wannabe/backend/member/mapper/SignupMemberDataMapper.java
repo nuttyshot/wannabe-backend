@@ -4,8 +4,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
-import wannabe.backend.member.repository.JpaMember;
-import wannabe.backend.member.repository.JpaMemberRepository;
+import wannabe.backend.member.repository.MemberEntity;
+import wannabe.backend.member.repository.MemberRepository;
 import wannabe.backend.member.domain.Member;
 import wannabe.backend.member.gateway.SignupMemberDsGateway;
 
@@ -13,11 +13,11 @@ import wannabe.backend.member.gateway.SignupMemberDsGateway;
 @RequiredArgsConstructor
 public class SignupMemberDataMapper implements SignupMemberDsGateway {
 
-  private final JpaMemberRepository repository;
+  private final MemberRepository repository;
 
   @Override
   public Member save(@NonNull Member member) {
-    val savedMember = repository.save(JpaMember.builder()
+    val savedMember = repository.save(MemberEntity.builder()
         .email(member.getEmail().getEmail())
         .birthday(member.getBirthday().getBirthday())
         .nickname(member.getNickname().getNickname())
@@ -25,6 +25,6 @@ public class SignupMemberDataMapper implements SignupMemberDsGateway {
         .ageRange(member.getAgeRange())
         .provider(member.getProvider())
         .build());
-    return JpaMemberToMemberFactory.create(savedMember);
+    return MemberEntityToMemberMapper.create(savedMember);
   }
 }

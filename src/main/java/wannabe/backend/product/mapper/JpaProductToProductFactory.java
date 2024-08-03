@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 import wannabe.backend.idol.domain.IdolMemberId;
-import wannabe.backend.product.repository.JpaProduct;
+import wannabe.backend.product.repository.ProductEntity;
 import wannabe.backend.product.domain.Product;
 import wannabe.backend.product.domain.ProductImages;
 import wannabe.backend.schedule.domain.ScheduleId;
@@ -15,7 +15,7 @@ public class JpaProductToProductFactory {
   private JpaProductToProductFactory() {
   }
 
-  public static Product create(@NonNull JpaProduct product, @NonNull List<String> imageUrls) {
+  public static Product create(@NonNull ProductEntity product, @NonNull List<String> imageUrls) {
     return Product.builder()
         .name(product.getName())
         .brand(product.getBrand())

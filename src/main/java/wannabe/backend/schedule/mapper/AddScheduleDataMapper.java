@@ -4,8 +4,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
-import wannabe.backend.schedule.repository.JpaSchedule;
-import wannabe.backend.schedule.repository.JpaScheduleRepository;
+import wannabe.backend.schedule.repository.ScheduleEntity;
+import wannabe.backend.schedule.repository.ScheduleRepository;
 import wannabe.backend.schedule.domain.Schedule;
 import wannabe.backend.schedule.domain.ScheduleId;
 import wannabe.backend.schedule.gateway.AddScheduleDsGateway;
@@ -14,11 +14,11 @@ import wannabe.backend.schedule.gateway.AddScheduleDsGateway;
 @RequiredArgsConstructor
 public class AddScheduleDataMapper implements AddScheduleDsGateway {
 
-  private final JpaScheduleRepository repository;
+  private final ScheduleRepository repository;
 
   @Override
   public ScheduleId addSchedule(@NonNull Schedule schedule) {
-    val savedSchedule = repository.save(JpaSchedule.builder()
+    val savedSchedule = repository.save(ScheduleEntity.builder()
         .name(schedule.name())
         .dateTime(schedule.dateTime())
         .build());

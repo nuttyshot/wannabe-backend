@@ -9,16 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import wannabe.backend.idol.repository.FakeJpaIdolGroupFactory;
-import wannabe.backend.idol.repository.JpaIdolGroupRepository;
-import wannabe.backend.idol.repository.FakeJpaIdolMemberFactory;
-import wannabe.backend.idol.repository.JpaIdolMemberRepository;
-import wannabe.backend.product.repository.FakeJpaProductFactory;
-import wannabe.backend.product.repository.FakeJpaProductImageFactory;
-import wannabe.backend.product.repository.JpaProductImageRepository;
-import wannabe.backend.schedule.repository.FakeJpaScheduleFactory;
-import wannabe.backend.schedule.repository.JpaScheduleRepository;
-import wannabe.backend.product.repository.JpaProductRepository;
+import wannabe.backend.idol.repository.FakeIdolGroupEntityFactory;
+import wannabe.backend.idol.repository.FakeIdolMemberEntityFactory;
+import wannabe.backend.idol.repository.IdolGroupRepository;
+import wannabe.backend.idol.repository.IdolMemberRepository;
+import wannabe.backend.product.repository.FakeProductEntityFactory;
+import wannabe.backend.product.repository.FakeProductImageEntityFactory;
+import wannabe.backend.product.repository.ProductImageRepository;
+import wannabe.backend.product.repository.ProductRepository;
+import wannabe.backend.schedule.repository.FakeScheduleEntityFactory;
+import wannabe.backend.schedule.repository.ScheduleRepository;
+
 
 @DataJpaTest
 @ActiveProfiles("local")
@@ -27,19 +28,19 @@ class FindProductDataMapperTest {
   private FindProductDataMapper mapper;
 
   @Autowired
-  private JpaIdolGroupRepository idolGroupRepository;
+  private IdolGroupRepository idolGroupRepository;
 
   @Autowired
-  private JpaIdolMemberRepository idolMemberRepository;
+  private IdolMemberRepository idolMemberRepository;
 
   @Autowired
-  private JpaScheduleRepository scheduleRepository;
+  private ScheduleRepository scheduleRepository;
 
   @Autowired
-  private JpaProductRepository productRepository;
+  private ProductRepository productRepository;
 
   @Autowired
-  private JpaProductImageRepository productImageRepository;
+  private ProductImageRepository productImageRepository;
 
   @BeforeEach
   void setUp() {
@@ -49,12 +50,12 @@ class FindProductDataMapperTest {
   @Test
   void 상품_조회() {
     // given
-    val idolGroup = idolGroupRepository.save(FakeJpaIdolGroupFactory.create());
-    val idolMember = idolMemberRepository.save(FakeJpaIdolMemberFactory.create(idolGroup));
-    val schedule = scheduleRepository.save(FakeJpaScheduleFactory.create());
-    val product = productRepository.save(FakeJpaProductFactory.create(schedule, idolMember));
-    productImageRepository.saveAll(List.of(FakeJpaProductImageFactory.create(product),
-        FakeJpaProductImageFactory.create(product)));
+    val idolGroup = idolGroupRepository.save(FakeIdolGroupEntityFactory.create());
+    val idolMember = idolMemberRepository.save(FakeIdolMemberEntityFactory.create(idolGroup));
+    val schedule = scheduleRepository.save(FakeScheduleEntityFactory.create());
+    val product = productRepository.save(FakeProductEntityFactory.create(schedule, idolMember));
+    productImageRepository.saveAll(List.of(FakeProductImageEntityFactory.create(product),
+        FakeProductImageEntityFactory.create(product)));
     // when
     val findProduct = mapper.findById(product.getId()).get();
     // then

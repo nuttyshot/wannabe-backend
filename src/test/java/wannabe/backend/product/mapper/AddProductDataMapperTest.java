@@ -11,21 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import wannabe.backend.idol.domain.IdolMemberId;
-import wannabe.backend.idol.repository.JpaIdolGroup;
-import wannabe.backend.idol.repository.JpaIdolGroupRepository;
-import wannabe.backend.idol.repository.JpaIdolMember;
-import wannabe.backend.idol.repository.JpaIdolMemberRepository;
-import wannabe.backend.product.repository.JpaProductImageRepository;
-import wannabe.backend.schedule.repository.JpaSchedule;
-import wannabe.backend.schedule.repository.JpaScheduleRepository;
+import wannabe.backend.idol.repository.IdolGroupEntity;
+import wannabe.backend.idol.repository.IdolGroupRepository;
+import wannabe.backend.idol.repository.IdolMemberEntity;
+import wannabe.backend.idol.repository.IdolMemberRepository;
 import wannabe.backend.product.domain.Color;
 import wannabe.backend.product.domain.ImageSequence;
 import wannabe.backend.product.domain.ImageUrl;
 import wannabe.backend.product.domain.Product;
 import wannabe.backend.product.domain.ProductImages;
 import wannabe.backend.product.domain.ProductType;
-import wannabe.backend.product.repository.JpaProductRepository;
+import wannabe.backend.product.repository.ProductImageRepository;
+import wannabe.backend.product.repository.ProductRepository;
 import wannabe.backend.schedule.domain.ScheduleId;
+import wannabe.backend.schedule.repository.ScheduleEntity;
+import wannabe.backend.schedule.repository.ScheduleRepository;
 
 @DataJpaTest
 @ActiveProfiles("local")
@@ -34,19 +34,19 @@ class AddProductDataMapperTest {
   private AddProductDataMapper mapper;
 
   @Autowired
-  private JpaScheduleRepository scheduleRepository;
+  private ScheduleRepository scheduleRepository;
 
   @Autowired
-  private JpaIdolMemberRepository idolMemberRepository;
+  private IdolMemberRepository idolMemberRepository;
 
   @Autowired
-  private JpaIdolGroupRepository idolGroupRepository;
+  private IdolGroupRepository idolGroupRepository;
 
   @Autowired
-  private JpaProductRepository productRepository;
+  private ProductRepository productRepository;
 
   @Autowired
-  private JpaProductImageRepository productImageRepository;
+  private ProductImageRepository productImageRepository;
 
   @BeforeEach
   void setUp() {
@@ -80,21 +80,21 @@ class AddProductDataMapperTest {
     assertThat(images.size()).isEqualTo(2);
   }
 
-  private JpaIdolGroup idolGroup() {
-    return JpaIdolGroup.builder()
+  private IdolGroupEntity idolGroup() {
+    return IdolGroupEntity.builder()
         .name("MOCK_IDOL_GROUP_NAME")
         .build();
   }
 
-  private JpaIdolMember idolMember(JpaIdolGroup idolGroup) {
-    return JpaIdolMember.builder()
+  private IdolMemberEntity idolMember(IdolGroupEntity idolGroup) {
+    return IdolMemberEntity.builder()
         .group(idolGroup)
         .name("MOCK_IDOL_MEMBER_NAME")
         .build();
   }
 
-  private JpaSchedule schedule() {
-    return JpaSchedule.builder()
+  private ScheduleEntity schedule() {
+    return ScheduleEntity.builder()
         .name("MOCK_SCHEDULE_NAME")
         .dateTime(LocalDateTime.MIN)
         .build();

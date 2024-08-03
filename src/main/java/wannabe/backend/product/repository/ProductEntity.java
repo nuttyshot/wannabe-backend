@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
 import wannabe.backend.common.repository.Audit;
-import wannabe.backend.idol.repository.JpaIdolMember;
-import wannabe.backend.schedule.repository.JpaSchedule;
+import wannabe.backend.idol.repository.IdolMemberEntity;
+import wannabe.backend.schedule.repository.ScheduleEntity;
 import wannabe.backend.product.domain.Color;
 import wannabe.backend.product.domain.Product;
 import wannabe.backend.product.domain.ProductType;
@@ -34,7 +34,7 @@ import wannabe.backend.product.domain.StyleType;
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class JpaProduct extends Audit {
+public class ProductEntity extends Audit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +49,7 @@ public class JpaProduct extends Audit {
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "schedule_id", nullable = false)
-  private JpaSchedule schedule;
+  private ScheduleEntity schedule;
 
   @Column(name = "price")
   private Integer price;
@@ -74,16 +74,16 @@ public class JpaProduct extends Audit {
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "idol_member_id", nullable = false)
-  private JpaIdolMember idolMember;
+  private IdolMemberEntity idolMember;
 
-  public JpaProduct(@NonNull Product product) {
+  public ProductEntity(@NonNull Product product) {
     this.name = product.name();
-    this.schedule = JpaSchedule.builder().id(product.scheduleId().value()).build();
+    this.schedule = ScheduleEntity.builder().id(product.scheduleId().value()).build();
     this.price = product.price();
     this.productType = product.productType();
     this.salesLink = product.salesLink();
     this.color = product.color();
     this.styleType = product.styleType();
-    this.idolMember = JpaIdolMember.builder().id(product.idolMemberId().id()).build();
+    this.idolMember = IdolMemberEntity.builder().id(product.idolMemberId().id()).build();
   }
 }

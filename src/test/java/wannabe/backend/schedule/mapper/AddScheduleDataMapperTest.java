@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import wannabe.backend.schedule.domain.Schedule;
-import wannabe.backend.schedule.repository.JpaScheduleRepository;
+import wannabe.backend.schedule.repository.ScheduleRepository;
 
 @DataJpaTest
 class AddScheduleDataMapperTest {
@@ -17,7 +17,7 @@ class AddScheduleDataMapperTest {
   private AddScheduleDataMapper mapper;
 
   @Autowired
-  private JpaScheduleRepository repository;
+  private ScheduleRepository repository;
 
   @BeforeEach
   void setUp() {

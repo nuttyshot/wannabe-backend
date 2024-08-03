@@ -28,7 +28,7 @@ import wannabe.backend.member.domain.Provider;
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class JpaMember extends Audit {
+public class MemberEntity extends Audit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

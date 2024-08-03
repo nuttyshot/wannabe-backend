@@ -4,7 +4,7 @@ import java.util.Optional;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface JpaIdolMemberRepository extends JpaRepository<JpaIdolMember, Long> {
+public interface IdolMemberRepository extends JpaRepository<IdolMemberEntity, Long> {
 
-  Optional<JpaIdolMember> findByName(@NonNull String name);
+  Optional<IdolMemberEntity> findByName(@NonNull String name);
 }

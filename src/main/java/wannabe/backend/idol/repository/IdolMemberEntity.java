@@ -25,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class JpaIdolMember {
+public class IdolMemberEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class JpaIdolMember {
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "idol_group_id", nullable = false)
-  private JpaIdolGroup group;
+  private IdolGroupEntity group;
 
   @Column(name = "name", length = 100, nullable = false)
   private String name;

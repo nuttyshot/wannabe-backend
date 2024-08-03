@@ -4,9 +4,9 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
-import wannabe.backend.product.repository.JpaProductRepository;
-import wannabe.backend.product.repository.JpaProductImage;
-import wannabe.backend.product.repository.JpaProductImageRepository;
+import wannabe.backend.product.repository.ProductRepository;
+import wannabe.backend.product.repository.ProductImageEntity;
+import wannabe.backend.product.repository.ProductImageRepository;
 import wannabe.backend.product.domain.Product;
 import wannabe.backend.product.gateway.FindProductDsGateway;
 
@@ -14,14 +14,14 @@ import wannabe.backend.product.gateway.FindProductDsGateway;
 @RequiredArgsConstructor
 public class FindProductDataMapper implements FindProductDsGateway {
 
-  private final JpaProductRepository productRepository;
-  private final JpaProductImageRepository productImageRepository;
+  private final ProductRepository productRepository;
+  private final ProductImageRepository productImageRepository;
 
   @Override
   public Optional<Product> findById(long productId) {
     val product = productRepository.findById(productId);
     val images = productImageRepository.findByProductId(productId)
-        .stream().map(JpaProductImage::getUrl).toList();
+        .stream().map(ProductImageEntity::getUrl).toList();
     return product.map(i -> JpaProductToProductFactory.create(i, images));
   }
 }

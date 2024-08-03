@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaMemberRepository extends JpaRepository<JpaMember, Long> {
+public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
-  Optional<JpaMember> findByEmail(@NonNull String email);
+  Optional<MemberEntity> findByEmail(@NonNull String email);
 }

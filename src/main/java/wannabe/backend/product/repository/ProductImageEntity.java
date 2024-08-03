@@ -28,7 +28,7 @@ import wannabe.backend.product.domain.ImageUrl;
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class JpaProductImage {
+public class ProductImageEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class JpaProductImage {
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "product_id", nullable = false)
-  private JpaProduct product;
+  private ProductEntity product;
 
   @Column(name = "url", length = 255, nullable = false)
   private String url;
@@ -45,9 +45,9 @@ public class JpaProductImage {
   @Column(name = "sequence", nullable = false)
   private long sequence;
 
-  public JpaProductImage(@NonNull Long productId, @NonNull ImageSequence sequence,
+  public ProductImageEntity(@NonNull Long productId, @NonNull ImageSequence sequence,
       @NonNull ImageUrl url) {
-    this.product = JpaProduct.builder().id(productId).build();
+    this.product = ProductEntity.builder().id(productId).build();
     this.sequence = sequence.sequence();
     this.url = url.url();
   }

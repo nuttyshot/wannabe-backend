@@ -7,18 +7,18 @@ import org.springframework.stereotype.Service;
 import wannabe.backend.idol.domain.IdolMemberId;
 import wannabe.backend.idol.gateway.FindIdolMemberDsGateway;
 import wannabe.backend.idol.domain.IdolMember;
-import wannabe.backend.idol.repository.JpaIdolMemberRepository;
+import wannabe.backend.idol.repository.IdolMemberRepository;
 
 @Service
 @RequiredArgsConstructor
 public class FindIdolMemberDataMapper implements FindIdolMemberDsGateway {
 
-  private final JpaIdolMemberRepository repository;
+  private final IdolMemberRepository repository;
 
   @Override
   public Optional<IdolMember> findByName(@NonNull String name) {
     return repository.findByName(name)
-        .map(JpaIdolMemberToIdolMemberFactory::create);
+        .map(IdolMemberEntityToIdolMemberMapper::create);
   }
 
   @Override
