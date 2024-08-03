@@ -3,6 +3,7 @@ package wannabe.backend.product.interactor;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,7 +53,7 @@ class FindProductInteractorTest {
     verify(gateway, only()).findById(anyLong());
     verify(findScheduleUseCase, only()).execute(any());
     verify(findIdolMemberByIdUseCase, only()).execute(any());
-    verify(checkProductLikeStatusUseCase, only()).execute(any());
+    verify(checkProductLikeStatusUseCase, only()).execute(any(), isNull());
     verify(presenter, only()).create(any(), any(), any(), any());
   }
 

@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 import wannabe.backend.idol.domain.IdolMember;
-import wannabe.backend.like.domain.ProductLikesStatus;
+import wannabe.backend.like.domain.ProductLikeStatus;
 import wannabe.backend.product.domain.ImageUrl;
 import wannabe.backend.product.domain.Product;
 import wannabe.backend.product.dto.FindProductResponse;
@@ -15,7 +15,7 @@ public class FindProductFormatter implements FindProductPresenter {
 
   @Override
   public FindProductResponse create(@NonNull Product product, Schedule schedule,
-      @NonNull IdolMember idolMember, @NonNull ProductLikesStatus likesStatus) {
+      @NonNull IdolMember idolMember, @NonNull ProductLikeStatus likesStatus) {
     return FindProductResponse.builder()
         .imageUrls(product.images().images().values().stream().map(ImageUrl::url).toList())
         .scheduleDate(schedule.dateTime().value())

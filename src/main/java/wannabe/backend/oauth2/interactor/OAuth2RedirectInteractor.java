@@ -47,7 +47,7 @@ public class OAuth2RedirectInteractor implements OAuth2RedirectUseCase {
   }
 
   private OAuth2Response mainPage(@NonNull MemberId id) {
-    val loginToken = createLoginTokenUseCAse.execute(new TokenInformation(id.id()));
+    val loginToken = createLoginTokenUseCAse.execute(new TokenInformation(id.value()));
     return presenter.mainPage(loginToken.accessToken(), loginToken.refreshToken(), loginToken.expiredAt());
   }
 }

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wannabe.backend.idol.usecase.FindIdolMemberByIdUseCase;
 import wannabe.backend.like.usecase.CheckProductLikeStatusUseCase;
-import wannabe.backend.product.gateway.FindProductDsGateway;
-import wannabe.backend.product.usecase.FindProductUseCase;
-import wannabe.backend.product.presenter.FindProductPresenter;
 import wannabe.backend.product.dto.FindProductResponse;
+import wannabe.backend.product.gateway.FindProductDsGateway;
+import wannabe.backend.product.presenter.FindProductPresenter;
+import wannabe.backend.product.usecase.FindProductUseCase;
 import wannabe.backend.schedule.usecase.FindScheduleUseCase;
 
 @Service
@@ -31,7 +31,7 @@ public class FindProductInteractor implements FindProductUseCase {
 
     val schedule = findScheduleUseCase.execute(product.scheduleId());
     val idolMember = findIdolMemberByIdUseCase.execute(product.idolMemberId());
-    val likesCount = checkProductLikeStatusUseCase.execute(product.id());
+    val likesCount = checkProductLikeStatusUseCase.execute(product.id(), null);
     return presenter.create(product, schedule, idolMember, likesCount);
   }
 }
