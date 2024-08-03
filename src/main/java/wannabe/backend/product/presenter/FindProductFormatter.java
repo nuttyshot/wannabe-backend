@@ -7,18 +7,18 @@ import wannabe.backend.idol.domain.IdolMember;
 import wannabe.backend.like.domain.ProductLikesStatus;
 import wannabe.backend.product.domain.ImageUrl;
 import wannabe.backend.product.domain.Product;
-import wannabe.backend.product.dto.AddProductRequest.Schedule;
 import wannabe.backend.product.dto.FindProductResponse;
+import wannabe.backend.schedule.domain.Schedule;
 
 @Service
 public class FindProductFormatter implements FindProductPresenter {
 
   @Override
-  public FindProductResponse create(@NonNull Product product, @NonNull Schedule schedule,
+  public FindProductResponse create(@NonNull Product product, Schedule schedule,
       @NonNull IdolMember idolMember, @NonNull ProductLikesStatus likesStatus) {
     return FindProductResponse.builder()
         .imageUrls(product.images().images().values().stream().map(ImageUrl::url).toList())
-        .scheduleDate(schedule.dateTime())
+        .scheduleDate(schedule.dateTime().value())
         .idolMemberName(idolMember.name().name())
         .productName(product.name())
         .hashTags(fakeHashTags())

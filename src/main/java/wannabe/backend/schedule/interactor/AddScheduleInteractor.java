@@ -4,7 +4,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import wannabe.backend.schedule.domain.factory.ScheduleFactory;
+import wannabe.backend.schedule.domain.ScheduleFactory;
 import wannabe.backend.schedule.domain.ScheduleId;
 import wannabe.backend.schedule.gateway.AddScheduleDsGateway;
 import wannabe.backend.schedule.dto.AddScheduleRequest;
@@ -19,6 +19,6 @@ public class AddScheduleInteractor implements AddScheduleUseCase {
 
   @Override
   public ScheduleId execute(@NonNull AddScheduleRequest request) {
-    return gateway.addSchedule(ScheduleFactory.create(request));
+    return gateway.save(ScheduleFactory.create(request.name(), request.dateTime()));
   }
 }

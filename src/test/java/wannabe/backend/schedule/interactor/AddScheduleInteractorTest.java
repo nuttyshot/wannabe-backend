@@ -29,7 +29,7 @@ class AddScheduleInteractorTest {
     // when
     interactor.execute(request());
     // then
-    verify(gateway, only()).addSchedule(any(Schedule.class));
+    verify(gateway, only()).save(any(Schedule.class));
   }
 
   private AddScheduleRequest request() {

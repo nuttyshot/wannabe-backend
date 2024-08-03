@@ -1,12 +1,13 @@
 package wannabe.backend.schedule.domain;
 
-import java.time.LocalDateTime;
+import static lombok.AccessLevel.PACKAGE;
+
 import lombok.Builder;
 import lombok.NonNull;
 
-@Builder
+@Builder(access = PACKAGE)
 public record Schedule(ScheduleId id,
-                       @NonNull String name,
-                       @NonNull LocalDateTime dateTime) {
+                       @NonNull ScheduleName name,
+                       @NonNull ScheduleDateTime dateTime) {
 
 }

@@ -6,5 +6,5 @@ import wannabe.backend.schedule.domain.ScheduleId;
 
 public interface AddScheduleDsGateway {
 
-  ScheduleId addSchedule(@NonNull Schedule schedule);
+  ScheduleId save(@NonNull Schedule schedule);
 }

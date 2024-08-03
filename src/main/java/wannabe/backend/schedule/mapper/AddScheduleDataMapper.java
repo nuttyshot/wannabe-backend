@@ -17,11 +17,8 @@ public class AddScheduleDataMapper implements AddScheduleDsGateway {
   private final ScheduleRepository repository;
 
   @Override
-  public ScheduleId addSchedule(@NonNull Schedule schedule) {
-    val savedSchedule = repository.save(ScheduleEntity.builder()
-        .name(schedule.name())
-        .dateTime(schedule.dateTime())
-        .build());
+  public ScheduleId save(@NonNull Schedule schedule) {
+    val savedSchedule = repository.save(ScheduleMapper.toEntity(schedule));
     return new ScheduleId(savedSchedule.getId());
   }
 }

@@ -1,10 +1,11 @@
 package wannabe.backend.schedule.gateway;
 
+import java.util.Optional;
 import lombok.NonNull;
-import wannabe.backend.product.dto.AddProductRequest.Schedule;
+import wannabe.backend.schedule.domain.Schedule;
 import wannabe.backend.schedule.domain.ScheduleId;
 
 public interface FindScheduleGateway {
 
-  Schedule findById(@NonNull ScheduleId id);
+  Optional<Schedule> findById(@NonNull ScheduleId id);
 }
