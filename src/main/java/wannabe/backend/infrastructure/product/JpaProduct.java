@@ -78,7 +78,7 @@ public class JpaProduct extends Audit {
 
   public JpaProduct(@NonNull Product product) {
     this.name = product.name();
-    this.schedule = JpaSchedule.builder().id(product.scheduleId().id()).build();
+    this.schedule = JpaSchedule.builder().id(product.scheduleId().value()).build();
     this.price = product.price();
     this.productType = product.productType();
     this.salesLink = product.salesLink();

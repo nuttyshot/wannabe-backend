@@ -6,7 +6,8 @@ import wannabe.backend.idol.entity.IdolMemberId;
 import wannabe.backend.schedule.entity.ScheduleId;
 
 @Builder
-public record Product(@NonNull String name,
+public record Product(ProductId id,
+                      @NonNull String name,
                       String brand,
                       @NonNull ProductType productType,
                       String seller,

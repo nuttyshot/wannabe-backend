@@ -1,4 +1,4 @@
-package wannabe.backend.idol.usecase.findidolmember;
+package wannabe.backend.idol.usecase.findidolmemberbyname;
 
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.Mockito.only;
@@ -13,12 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import wannabe.backend.idol.FakeIdolMemberFactory;
+import wannabe.backend.idol.usecase.FindIdolMemberDsGateway;
 
 @ExtendWith(MockitoExtension.class)
-class FindIdolMemberInteractorTest {
+class FindIdolMemberByNameInteractorTest {
 
   @InjectMocks
-  private FindIdolMemberInteractor interactor;
+  private FindIdolMemberByNameInteractor interactor;
 
   @Mock
   private FindIdolMemberDsGateway gateway;
@@ -28,7 +29,7 @@ class FindIdolMemberInteractorTest {
     // given
     when(gateway.findByName("MOCK_NAME")).thenReturn(Optional.of(FakeIdolMemberFactory.create()));
     // when
-    interactor.find("MOCK_NAME");
+    interactor.execute("MOCK_NAME");
     // then
     verify(gateway, only()).findByName("MOCK_NAME");
   }
@@ -39,6 +40,6 @@ class FindIdolMemberInteractorTest {
     when(gateway.findByName("MOCK_NAME")).thenReturn(Optional.empty());
     // when
     // then
-    assertThrowsExactly(NoSuchElementException.class, () -> interactor.find("MOCK_NAME"));
+    assertThrowsExactly(NoSuchElementException.class, () -> interactor.execute("MOCK_NAME"));
   }
 }

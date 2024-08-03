@@ -1,7 +1,10 @@
 package wannabe.backend.idol.entity;
 
-import lombok.NonNull;
+public record IdolMemberId(long id) {
 
-public record IdolMemberId(@NonNull Long id) {
-
+  public IdolMemberId {
+    if (id <= 0) {
+      throw new IllegalArgumentException("아이돌 멤버 ID는 1 이상 이어야 합니다.");
+    }
+  }
 }

@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.NonNull;
 
 @Builder
-public record IdolMember(@NonNull IdolMemberId id) {
+public record IdolMember(@NonNull IdolMemberId id,
+                         @NonNull IdolMemberName name) {
 
 }

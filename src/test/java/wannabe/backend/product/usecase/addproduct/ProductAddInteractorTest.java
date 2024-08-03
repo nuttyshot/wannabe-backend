@@ -1,13 +1,11 @@
 package wannabe.backend.product.usecase.addproduct;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -15,9 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.idol.FakeIdolMemberFactory;
 import wannabe.backend.idol.entity.IdolMember;
 import wannabe.backend.idol.entity.IdolMemberId;
-import wannabe.backend.idol.usecase.findidolmember.FindIdolMemberUseCase;
+import wannabe.backend.idol.usecase.findidolmemberbyname.FindIdolMemberByNameUseCase;
 import wannabe.backend.product.entity.Color;
 import wannabe.backend.product.entity.Product;
 import wannabe.backend.product.entity.ProductType;
@@ -33,7 +32,7 @@ class ProductAddInteractorTest {
   private ProductAddInteractor interactor;
 
   @Mock
-  private FindIdolMemberUseCase findIdolMemberUseCase;
+  private FindIdolMemberByNameUseCase findIdolMemberByNameUseCase;
 
   @Mock
   private AddScheduleUseCase addScheduleUseCase;
@@ -44,12 +43,12 @@ class ProductAddInteractorTest {
   @Test
   void 정상동작() {
     // given
-    when(findIdolMemberUseCase.find(anyString())).thenReturn(idolMember());
+    when(findIdolMemberByNameUseCase.execute(anyString())).thenReturn(FakeIdolMemberFactory.create());
     when(addScheduleUseCase.addSchedule(any())).thenReturn(new ScheduleId(1L));
     // when
     interactor.addProduct(request());
     // then
-    verify(findIdolMemberUseCase, only()).find(anyString());
+    verify(findIdolMemberByNameUseCase, only()).execute(anyString());
     verify(addScheduleUseCase, only()).addSchedule(any(AddScheduleRequest.class));
     verify(addProductDsGateway, only()).addProduct(any(Product.class));
   }
@@ -69,9 +68,5 @@ class ProductAddInteractorTest {
             .imageUrls(List.of())
             .build())
         .build();
-  }
-
-  private static IdolMember idolMember() {
-    return IdolMember.builder().id(new IdolMemberId(1L)).build();
   }
 }

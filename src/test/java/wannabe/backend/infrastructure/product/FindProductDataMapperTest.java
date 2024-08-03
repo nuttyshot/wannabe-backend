@@ -58,7 +58,7 @@ class FindProductDataMapperTest {
     val findProduct = mapper.findById(product.getId()).get();
     // then
     assertThat(findProduct).isNotNull();
-    assertThat(findProduct.scheduleId().id()).isEqualTo(schedule.getId());
+    assertThat(findProduct.scheduleId().value()).isEqualTo(schedule.getId());
     assertThat(findProduct.images().images().values()).hasSize(2);
   }
 }

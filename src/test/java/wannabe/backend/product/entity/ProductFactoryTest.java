@@ -27,7 +27,7 @@ class ProductFactoryTest {
         new IdolMemberId(1L));
     // then
     assertThat(product.name()).isEqualTo("MOCK_PRODUCT_NAME");
-    assertThat(product.scheduleId().id()).isEqualTo(1L);
+    assertThat(product.scheduleId().value()).isEqualTo(1L);
     assertThat(product.images().images().size()).isEqualTo(2);
     assertThat(product.images().images()).isEqualTo(
         Map.of(new ImageSequence(0), new ImageUrl("MOCK_IMAGE_URL1"),

@@ -36,7 +36,7 @@ class AddScheduleDataMapperTest {
         .name("MOCK_SCHEDULE_NAME")
         .dateTime(LocalDateTime.MIN)
         .build());
-    val schedule = repository.findById(scheduleId.id()).get();
+    val schedule = repository.findById(scheduleId.value()).get();
     // then
     assertThat(schedule).isNotNull();
     assertThat(schedule.getName()).isEqualTo("MOCK_SCHEDULE_NAME");

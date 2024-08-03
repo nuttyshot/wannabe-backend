@@ -4,7 +4,8 @@ import java.util.Optional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import wannabe.backend.idol.usecase.findidolmember.FindIdolMemberDsGateway;
+import wannabe.backend.idol.entity.IdolMemberId;
+import wannabe.backend.idol.usecase.FindIdolMemberDsGateway;
 import wannabe.backend.idol.entity.IdolMember;
 
 @Service
@@ -17,5 +18,10 @@ public class FindIdolMemberDataMapper implements FindIdolMemberDsGateway {
   public Optional<IdolMember> findByName(@NonNull String name) {
     return repository.findByName(name)
         .map(JpaIdolMemberToIdolMemberFactory::create);
+  }
+
+  @Override
+  public Optional<IdolMember> findById(@NonNull IdolMemberId id) {
+    return Optional.empty();
   }
 }
