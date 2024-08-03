@@ -19,7 +19,7 @@ public class FindProductFormatter implements FindProductPresenter {
     return FindProductResponse.builder()
         .imageUrls(product.images().images().values().stream().map(ImageUrl::url).toList())
         .scheduleDate(schedule.dateTime().value())
-        .idolMemberName(idolMember.name().name())
+        .idolMemberName(idolMember.name().value())
         .productName(product.name())
         .hashTags(fakeHashTags())
         .isLike(likesStatus.liked())

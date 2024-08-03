@@ -84,6 +84,6 @@ public class ProductEntity extends Audit {
     this.salesLink = product.salesLink();
     this.color = product.color();
     this.styleType = product.styleType();
-    this.idolMember = IdolMemberEntity.builder().id(product.idolMemberId().id()).build();
+    this.idolMember = IdolMemberEntity.builder().id(product.idolMemberId().value()).build();
   }
 }
