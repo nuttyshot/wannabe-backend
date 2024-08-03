@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.interactor;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,24 +16,26 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import wannabe.backend.config.security.auth.JwtSecurityArgumentGateway;
-import wannabe.backend.token.usecase.getlogintoken.TokenInformation.TokenKey;
+import wannabe.backend.token.usecase.CreateRefreshTokenUseCase;
+import wannabe.backend.token.domain.TokenInformation;
+import wannabe.backend.token.domain.TokenInformation.TokenKey;
 import wannabe.backend.util.date.DateTimeProvider;
 
 @Service
 @RequiredArgsConstructor
-public class AccessTokenInteractor implements AccessTokenPort {
+public class CreateRefreshTokenInteractor implements CreateRefreshTokenUseCase {
 
   private final JwtSecurityArgumentGateway jwtSecurityArgumentGateway;
   private final AuthenticationManagerBuilder authenticationManagerBuilder;
   private final DateTimeProvider dateTimeProvider;
 
   @Override
-  public String getAccessToken(@NonNull TokenInformation tokenInformation, @NonNull String issuer) {
+  public String getRefreshToken(@NonNull TokenInformation tokenInformation, @NonNull String issuer) {
     val key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecurityArgumentGateway.jwtSecret()));
 
     val now = dateTimeProvider.nowTimestamp();
     val uuid = UUID.randomUUID().toString();
-    val ACCESS_TOKEN_EXPIRATION_TIME = 1000L * 60 * 10; // 10분
+    val REFRESH_TOKEN_EXPIRATION_TIME = 1000L * 60 * 60 * 24 * 30 * 3; // 3개월
 
     // MEMBER ID를 기반으로 Authentication 객체 생성
     val authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -53,7 +55,7 @@ public class AccessTokenInteractor implements AccessTokenPort {
         .setIssuer(issuer)
         .setIssuedAt(new Date(now))
         .setNotBefore(new Date(now))
-        .setExpiration(new Date(now + ACCESS_TOKEN_EXPIRATION_TIME))
+        .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRATION_TIME))
         .setId(uuid)
         .compact();
   }

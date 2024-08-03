@@ -1,10 +1,9 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.domain;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NonNull;
 
-@Builder(access = AccessLevel.PACKAGE)
+@Builder
 public record LoginToken(@NonNull String accessToken,
                          @NonNull String refreshToken,
                          long expiredAt) {

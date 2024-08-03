@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.interactor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -18,14 +18,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import wannabe.backend.config.security.auth.JwtSecurityArgumentGateway;
-import wannabe.backend.token.usecase.getlogintoken.TokenInformation.TokenKey;
+import wannabe.backend.token.domain.TokenInformation;
+import wannabe.backend.token.domain.TokenInformation.TokenKey;
 import wannabe.backend.util.date.DateTimeProvider;
 
 @ExtendWith(MockitoExtension.class)
-class RefreshTokenInteractorTest {
+class CreateRefreshTokenInteractorTest {
 
   @InjectMocks
-  private RefreshTokenInteractor interactor;
+  private CreateRefreshTokenInteractor interactor;
 
   @Mock
   private JwtSecurityArgumentGateway jwtSecurityArgumentGateway;

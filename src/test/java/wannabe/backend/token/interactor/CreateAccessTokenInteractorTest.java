@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.interactor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -18,14 +18,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import wannabe.backend.config.security.auth.JwtSecurityArgumentGateway;
-import wannabe.backend.token.usecase.getlogintoken.TokenInformation.TokenKey;
+import wannabe.backend.token.domain.TokenInformation;
+import wannabe.backend.token.domain.TokenInformation.TokenKey;
 import wannabe.backend.util.date.DateTimeProvider;
 
 @ExtendWith(MockitoExtension.class)
-class AccessTokenInteractorTest {
+class CreateAccessTokenInteractorTest {
 
   @InjectMocks
-  private AccessTokenInteractor interactor;
+  private CreateAccessTokenInteractor interactor;
 
   @Mock
   private JwtSecurityArgumentGateway jwtSecurityArgumentGateway;
@@ -48,7 +49,7 @@ class AccessTokenInteractorTest {
     when(authenticationManagerBuilder.getObject()).thenReturn(authenticationManager);
     when(authenticationManager.authenticate(any())).thenReturn(mock(Authentication.class));
     // when
-    val accessToken = interactor.getAccessToken(new TokenInformation(1L), "MOCK_ISSUER");
+    val accessToken = interactor.execute(new TokenInformation(1L), "MOCK_ISSUER");
     // then
     val parseToken = Jwts.parserBuilder()
         .setSigningKey(KEY)

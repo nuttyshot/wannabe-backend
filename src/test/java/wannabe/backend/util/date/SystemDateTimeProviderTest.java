@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.util.date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.util.date.SystemDateTimeProvider;
 
 @ExtendWith(MockitoExtension.class)
 class SystemDateTimeProviderTest {

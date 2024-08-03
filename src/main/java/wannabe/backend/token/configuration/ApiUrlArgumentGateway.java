@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.configuration;
 
 public interface ApiUrlArgumentGateway {
 

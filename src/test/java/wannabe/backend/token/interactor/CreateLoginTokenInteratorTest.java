@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.interactor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -15,22 +15,26 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.token.configuration.ApiUrlArgumentGateway;
+import wannabe.backend.token.domain.TokenInformation;
+import wannabe.backend.token.usecase.CreateAccessTokenUseCase;
+import wannabe.backend.token.usecase.CreateRefreshTokenUseCase;
 import wannabe.backend.util.date.DateTimeProvider;
 
 @ExtendWith(MockitoExtension.class)
-class LoginTokenInteratorTest {
+class CreateLoginTokenInteratorTest {
 
   @InjectMocks
-  private LoginTokenInterator interator;
+  private CreateLoginTokenInterator interator;
 
   @Mock
   private ApiUrlArgumentGateway apiUrlArgumentGateway;
 
   @Mock
-  private AccessTokenPort accessTokenPort;
+  private CreateAccessTokenUseCase createAccessTokenUseCase;
 
   @Mock
-  private RefreshTokenPort refreshTokenPort;
+  private CreateRefreshTokenUseCase createRefreshTokenUseCase;
 
   @Mock
   private DateTimeProvider dateTimeProvider;
@@ -43,16 +47,16 @@ class LoginTokenInteratorTest {
 
     when(dateTimeProvider.nowTimestamp()).thenReturn(NOW);
     when(apiUrlArgumentGateway.getApiUrl()).thenReturn(API_URL);
-    when(accessTokenPort.getAccessToken(any(), anyString())).thenReturn("MOCK_ACCESS_TOKEN");
-    when(refreshTokenPort.getRefreshToken(any(), anyString())).thenReturn("MOCK_REFRESH_TOKEN");
+    when(createAccessTokenUseCase.execute(any(), anyString())).thenReturn("MOCK_ACCESS_TOKEN");
+    when(createRefreshTokenUseCase.getRefreshToken(any(), anyString())).thenReturn("MOCK_REFRESH_TOKEN");
     // when
-    val loginToken = interator.getLoginToken(new TokenInformation(1L));
+    val loginToken = interator.execute(new TokenInformation(1L));
     // then
     assertThat(loginToken).isNotNull();
 
     verify(dateTimeProvider, only()).nowTimestamp();
     verify(apiUrlArgumentGateway, only()).getApiUrl();
-    verify(accessTokenPort, only()).getAccessToken(any(), eq(API_URL + "/auth/login"));
-    verify(refreshTokenPort, only()).getRefreshToken(any(), eq(API_URL + "/auth/login"));
+    verify(createAccessTokenUseCase, only()).execute(any(), eq(API_URL + "/auth/login"));
+    verify(createRefreshTokenUseCase, only()).getRefreshToken(any(), eq(API_URL + "/auth/login"));
   }
 }

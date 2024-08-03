@@ -13,8 +13,8 @@ import wannabe.backend.oauth2.usecase.GetOAuth2MemberInfoUseCase;
 import wannabe.backend.member.domain.OAuth2Request;
 import wannabe.backend.member.domain.OAuth2Response;
 import wannabe.backend.member.usecase.SignupMemberUseCase;
-import wannabe.backend.token.usecase.getlogintoken.TokenInformation;
-import wannabe.backend.token.usecase.getlogintoken.LoginTokenPort;
+import wannabe.backend.token.domain.TokenInformation;
+import wannabe.backend.token.usecase.CreateLoginTokenUseCase;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class OAuth2RedirectInteractor implements OAuth2RedirectUseCase {
   private final FindMemberUseCase findMemberUseCase;
   private final SignupMemberUseCase signupMemberUseCase;
   private final OAuth2Presenter presenter;
-  private final LoginTokenPort loginTokenPort;
+  private final CreateLoginTokenUseCase createLoginTokenUseCAse;
 
   @Override
   public OAuth2Response execute(@NonNull OAuth2Request request) {
@@ -47,7 +47,7 @@ public class OAuth2RedirectInteractor implements OAuth2RedirectUseCase {
   }
 
   private OAuth2Response mainPage(@NonNull MemberId id) {
-    val loginToken = loginTokenPort.getLoginToken(new TokenInformation(id.id()));
+    val loginToken = createLoginTokenUseCAse.execute(new TokenInformation(id.id()));
     return presenter.mainPage(loginToken.accessToken(), loginToken.refreshToken(), loginToken.expiredAt());
   }
 }

@@ -1,4 +1,4 @@
-package wannabe.backend.token.usecase.getlogintoken;
+package wannabe.backend.token.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
