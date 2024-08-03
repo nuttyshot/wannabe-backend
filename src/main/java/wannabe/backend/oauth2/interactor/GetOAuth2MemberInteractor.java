@@ -53,7 +53,7 @@ public class GetOAuth2MemberInteractor implements GetOAuth2MemberInfoUseCase {
       val resBody = objectMapper.readValue(bodyString,
           new TypeReference<Map<String, Object>>() {});
 
-      errorPort.receive(request.registrationId(), res.code(), resBody);
+      errorPort.execute(request.registrationId(), res.code(), resBody);
 
       return oAuth2MemberFactory.create(request.registrationId(), resBody);
     } catch (IOException e) {

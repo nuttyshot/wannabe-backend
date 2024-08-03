@@ -12,7 +12,7 @@ import wannabe.backend.member.domain.Provider;
 public class ValidateOAuthErrorInteractor implements ValidateOAuth2ErrorUseCase {
 
   @Override
-  public void receive(@NonNull Provider registrationId, int status,
+  public void execute(@NonNull Provider registrationId, int status,
       @NonNull Map<String, Object> resBody) {
 
     if (status == 200) {

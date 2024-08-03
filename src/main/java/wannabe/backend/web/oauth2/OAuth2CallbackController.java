@@ -38,7 +38,7 @@ public class OAuth2CallbackController {
         .state(state)
         .build();
 
-    val oAuth2Response = oAuth2RedirectUseCase.success(oAuth2Request);
+    val oAuth2Response = oAuth2RedirectUseCase.execute(oAuth2Request);
     response.sendRedirect(oAuth2Response.redirectView().getUrl());
   }
 }

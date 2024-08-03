@@ -4,7 +4,7 @@ import lombok.NonNull;
 import wannabe.backend.member.domain.MemberId;
 import wannabe.backend.member.domain.OAuth2Member;
 
-public interface SignupMemberPort {
+public interface SignupMemberUseCase {
 
-  MemberId signup(@NonNull OAuth2Member oAuth2Member);
+  MemberId execute(@NonNull OAuth2Member oAuth2Member);
 }

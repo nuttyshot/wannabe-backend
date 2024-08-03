@@ -21,6 +21,6 @@ public class FindProductController {
   @Operation(summary = "상품 상세 조회")
   @GetMapping
   public FindProductResponse find(@PathVariable(value = "productId") Long productId) {
-    return useCase.findProduct(productId);
+    return useCase.execute(productId);
   }
 }

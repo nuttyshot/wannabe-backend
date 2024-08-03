@@ -34,6 +34,6 @@ class FindProductControllerTest {
     mockMvc.perform(get("/products/1"))
         .andExpect(status().isOk());
     // then
-    verify(useCase, only()).findProduct(anyLong());
+    verify(useCase, only()).execute(anyLong());
   }
 }

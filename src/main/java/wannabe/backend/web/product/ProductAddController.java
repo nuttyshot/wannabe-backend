@@ -20,7 +20,7 @@ import wannabe.backend.product.dto.AddProductRequest;
 import wannabe.backend.product.dto.AddProductRequest.IdolMember;
 import wannabe.backend.product.dto.AddProductRequest.Product;
 import wannabe.backend.product.dto.AddProductRequest.Schedule;
-import wannabe.backend.product.usecase.ProductAddUseCase;
+import wannabe.backend.product.usecase.AddProductUseCase;
 
 @Tag(name = "상품")
 @RestController
@@ -28,12 +28,12 @@ import wannabe.backend.product.usecase.ProductAddUseCase;
 @RequiredArgsConstructor
 public class ProductAddController {
 
-  private final ProductAddUseCase useCase;
+  private final AddProductUseCase useCase;
 
   @Operation(summary = "상품 추가")
   @PostMapping
   public void add(@Valid @RequestBody Body body) {
-    useCase.addProduct(request(body));
+    useCase.execute(request(body));
   }
 
   private AddProductRequest request(@NonNull Body body) {

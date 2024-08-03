@@ -47,7 +47,7 @@ class FindProductInteractorTest {
     // given
     when(gateway.findById(anyLong())).thenReturn(Optional.of(FakeProductFactory.create()));
     // when
-    interactor.findProduct(1L);
+    interactor.execute(1L);
     // then
     verify(gateway, only()).findById(anyLong());
     verify(findScheduleUseCase, only()).execute(any());
@@ -62,6 +62,6 @@ class FindProductInteractorTest {
     when(gateway.findById(anyLong())).thenReturn(Optional.empty());
     // when
     // then
-    assertThrowsExactly(NoSuchElementException.class, () -> interactor.findProduct(1L));
+    assertThrowsExactly(NoSuchElementException.class, () -> interactor.execute(1L));
   }
 }

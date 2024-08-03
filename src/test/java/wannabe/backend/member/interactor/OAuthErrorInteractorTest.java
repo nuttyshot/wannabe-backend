@@ -24,7 +24,7 @@ class OAuthErrorInteractorTest {
     // given
     // when
     // then
-    assertDoesNotThrow(() -> interactor.receive(KAKAO, 200, Map.of()));
+    assertDoesNotThrow(() -> interactor.execute(KAKAO, 200, Map.of()));
   }
 
   @Test
@@ -33,7 +33,7 @@ class OAuthErrorInteractorTest {
     // when
     // then
     assertThrowsExactly(OAuth2NetworkException.class,
-        () -> interactor.receive(KAKAO, 400, Map.of()));
+        () -> interactor.execute(KAKAO, 400, Map.of()));
   }
 
   @Test
@@ -42,6 +42,6 @@ class OAuthErrorInteractorTest {
     // when
     // then
     assertThrowsExactly(OAuth2NetworkException.class,
-        () -> interactor.receive(NAVER, 400, Map.of()));
+        () -> interactor.execute(NAVER, 400, Map.of()));
   }
 }

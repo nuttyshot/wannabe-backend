@@ -6,5 +6,5 @@ import wannabe.backend.member.domain.OAuth2Response;
 
 public interface OAuth2RedirectUseCase {
 
-  OAuth2Response success(@NonNull OAuth2Request request);
+  OAuth2Response execute(@NonNull OAuth2Request request);
 }

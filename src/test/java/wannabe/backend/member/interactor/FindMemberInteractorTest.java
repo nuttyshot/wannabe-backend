@@ -28,7 +28,7 @@ class FindMemberInteractorTest {
     // given
     when(gateway.findByEmail(any())).thenReturn(Optional.of(member()));
     // when
-    val findMember = interactor.findByEmail("MOCK_EMAIL").get();
+    val findMember = interactor.execute("MOCK_EMAIL").get();
     // then
     assertThat(findMember).isNotNull();
   }

@@ -6,5 +6,5 @@ import wannabe.backend.member.domain.Provider;
 
 public interface ValidateOAuth2ErrorUseCase {
 
-  void receive(@NonNull Provider registrationId, int status, @NonNull Map<String, Object> resBody);
+  void execute(@NonNull Provider registrationId, int status, @NonNull Map<String, Object> resBody);
 }

@@ -18,7 +18,7 @@ public class AddScheduleInteractor implements AddScheduleUseCase {
   private final AddScheduleDsGateway gateway;
 
   @Override
-  public ScheduleId addSchedule(@NonNull AddScheduleRequest request) {
+  public ScheduleId execute(@NonNull AddScheduleRequest request) {
     return gateway.addSchedule(ScheduleFactory.create(request));
   }
 }

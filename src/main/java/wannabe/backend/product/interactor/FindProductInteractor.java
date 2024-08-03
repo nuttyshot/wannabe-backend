@@ -25,7 +25,7 @@ public class FindProductInteractor implements FindProductUseCase {
   private final CheckProductLikeStatusUseCase checkProductLikeStatusUseCase;
 
   @Override
-  public FindProductResponse findProduct(long productId) {
+  public FindProductResponse execute(long productId) {
     val product = gateway.findById(productId)
         .orElseThrow(() -> new NoSuchElementException("상품을 찾을 수 없습니다 : " + productId));
 

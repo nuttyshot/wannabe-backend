@@ -27,7 +27,7 @@ class AddScheduleInteractorTest {
   void 스케쥴_추가() {
     // given
     // when
-    interactor.addSchedule(request());
+    interactor.execute(request());
     // then
     verify(gateway, only()).addSchedule(any(Schedule.class));
   }

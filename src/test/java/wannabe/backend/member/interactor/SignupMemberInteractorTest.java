@@ -40,7 +40,7 @@ class SignupMemberInteractorTest {
     when(memberFactory.create(any())).thenReturn(FakeFactory.memberBeforeSave());
     when(gateway.save(any())).thenReturn(FakeFactory.memberAfterSave());
     // when
-    interactor.signup(FakeFactory.oauth2Member());
+    interactor.execute(FakeFactory.oauth2Member());
     // then
     verify(memberFactoryProvider, only()).getMemberFactory(any());
     verify(memberFactory, only()).create(any());

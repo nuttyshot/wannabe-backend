@@ -3,7 +3,7 @@ package wannabe.backend.product.usecase;
 import lombok.NonNull;
 import wannabe.backend.product.dto.AddProductRequest;
 
-public interface ProductAddUseCase {
+public interface AddProductUseCase {
 
-  void addProduct(@NonNull AddProductRequest command);
+  void execute(@NonNull AddProductRequest command);
 }

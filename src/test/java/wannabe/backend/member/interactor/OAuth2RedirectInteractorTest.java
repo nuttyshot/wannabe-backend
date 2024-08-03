@@ -21,7 +21,7 @@ import wannabe.backend.oauth2.interactor.OAuth2RedirectInteractor;
 import wannabe.backend.member.usecase.FindMemberUseCase;
 import wannabe.backend.oauth2.usecase.GetOAuth2MemberInfoUseCase;
 import wannabe.backend.member.presenter.OAuth2Presenter;
-import wannabe.backend.member.usecase.SignupMemberPort;
+import wannabe.backend.member.usecase.SignupMemberUseCase;
 import wannabe.backend.token.usecase.getlogintoken.FakeLoginTokenFactory;
 import wannabe.backend.token.usecase.getlogintoken.LoginTokenPort;
 
@@ -38,7 +38,7 @@ class OAuth2RedirectInteractorTest {
   private FindMemberUseCase findMemberUseCase;
 
   @Mock
-  private SignupMemberPort signupMemberPort;
+  private SignupMemberUseCase signupMemberUseCase;
 
   @Mock
   private OAuth2Presenter presenter;
@@ -50,15 +50,15 @@ class OAuth2RedirectInteractorTest {
   void 가입한_유저가_아닐경우_가입시키고_페이지로_이동해야한다() {
     // given
     when(getOAuth2MemberInfoUseCase.resolve(any())).thenReturn(FakeOAuth2MemberFactory.nonMember());
-    when(findMemberUseCase.findByEmail(anyString())).thenReturn(Optional.empty());
-    when(signupMemberPort.signup(any())).thenReturn(new MemberId(1L));
+    when(findMemberUseCase.execute(anyString())).thenReturn(Optional.empty());
+    when(signupMemberUseCase.execute(any())).thenReturn(new MemberId(1L));
     when(loginTokenPort.getLoginToken(any())).thenReturn(FakeLoginTokenFactory.create());
     // when
-    interactor.success(FakeOAuth2RequestFactory.create());
+    interactor.execute(FakeOAuth2RequestFactory.create());
     // then
     verify(getOAuth2MemberInfoUseCase, only()).resolve(any());
-    verify(findMemberUseCase, only()).findByEmail(anyString());
-    verify(signupMemberPort, only()).signup(any());
+    verify(findMemberUseCase, only()).execute(anyString());
+    verify(signupMemberUseCase, only()).execute(any());
     verify(loginTokenPort, only()).getLoginToken(any());
     verify(presenter, only()).mainPage(anyString(), anyString(), anyLong());
   }

@@ -6,5 +6,5 @@ import wannabe.backend.schedule.dto.AddScheduleRequest;
 
 public interface AddScheduleUseCase {
 
-  ScheduleId addSchedule(@NonNull AddScheduleRequest request);
+  ScheduleId execute(@NonNull AddScheduleRequest request);
 }

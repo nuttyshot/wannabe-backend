@@ -6,5 +6,5 @@ import wannabe.backend.member.domain.Member;
 
 public interface FindMemberUseCase {
 
-  Optional<Member> findByEmail(@NonNull String email);
+  Optional<Member> execute(@NonNull String email);
 }

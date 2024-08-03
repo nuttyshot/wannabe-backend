@@ -17,7 +17,7 @@ public class FindMemberInteractor implements FindMemberUseCase {
   private final FindMemberDsGateway gateway;
 
   @Override
-  public Optional<Member> findByEmail(@NonNull String email) {
+  public Optional<Member> execute(@NonNull String email) {
     return gateway.findByEmail(email);
   }
 }

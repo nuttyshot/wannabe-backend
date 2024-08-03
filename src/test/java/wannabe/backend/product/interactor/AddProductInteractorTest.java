@@ -44,12 +44,12 @@ class AddProductInteractorTest {
   void 정상동작() {
     // given
     when(findIdolMemberByNameUseCase.execute(anyString())).thenReturn(FakeIdolMemberFactory.create());
-    when(addScheduleUseCase.addSchedule(any())).thenReturn(new ScheduleId(1L));
+    when(addScheduleUseCase.execute(any())).thenReturn(new ScheduleId(1L));
     // when
-    interactor.addProduct(request());
+    interactor.execute(request());
     // then
     verify(findIdolMemberByNameUseCase, only()).execute(anyString());
-    verify(addScheduleUseCase, only()).addSchedule(any(AddScheduleRequest.class));
+    verify(addScheduleUseCase, only()).execute(any(AddScheduleRequest.class));
     verify(addProductDsGateway, only()).addProduct(any(Product.class));
   }
 
