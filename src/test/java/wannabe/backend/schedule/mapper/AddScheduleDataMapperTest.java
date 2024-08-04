@@ -8,10 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import wannabe.backend.schedule.domain.FakeSchedule;
-import wannabe.backend.schedule.domain.Schedule;
-import wannabe.backend.schedule.domain.ScheduleDateTime;
-import wannabe.backend.schedule.domain.ScheduleName;
+import wannabe.backend.schedule.domain.FakeScheduleFactory;
 import wannabe.backend.schedule.repository.ScheduleRepository;
 
 @DataJpaTest
@@ -31,8 +28,7 @@ class AddScheduleDataMapperTest {
   void 스케쥴_insert() {
     // given
     // when
-    val scheduleId = mapper.save(FakeSchedule.builder()
-        .name("SCHEDULE_NAME").dateTime(LocalDateTime.MIN).build().create());
+    val scheduleId = mapper.save(FakeScheduleFactory.create("SCHEDULE_NAME", LocalDateTime.MIN));
     val schedule = repository.findById(scheduleId.value()).get();
     // then
     assertThat(schedule).isNotNull();

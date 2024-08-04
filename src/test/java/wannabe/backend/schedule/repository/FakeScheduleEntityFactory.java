@@ -10,4 +10,12 @@ public class FakeScheduleEntityFactory {
         .dateTime(LocalDateTime.MIN)
         .build();
   }
+
+  public static ScheduleEntity create(Long id, String name, LocalDateTime dateTime) {
+    return ScheduleEntity.builder()
+        .id(id)
+        .name(name)
+        .dateTime(dateTime)
+        .build();
+  }
 }

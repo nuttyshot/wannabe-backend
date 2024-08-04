@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDateTime;
 import lombok.val;
 import org.junit.jupiter.api.Test;
-import wannabe.backend.schedule.domain.FakeSchedule;
+import wannabe.backend.schedule.domain.FakeScheduleFactory;
 import wannabe.backend.schedule.domain.ScheduleId;
 import wannabe.backend.schedule.domain.ScheduleName;
-import wannabe.backend.schedule.repository.FakeScheduleEntity;
+import wannabe.backend.schedule.repository.FakeScheduleEntityFactory;
 
 class ScheduleMapperTest {
 
@@ -16,8 +16,8 @@ class ScheduleMapperTest {
   void JPA_엔티티로_변환() {
     // given
     // when
-    val entity = ScheduleMapper.toEntity(FakeSchedule.builder()
-        .name("SCHEDULE_NAME").dateTime(LocalDateTime.MIN).build().create());
+    val entity = ScheduleMapper.toEntity(
+        FakeScheduleFactory.create("SCHEDULE_NAME", LocalDateTime.MIN));
     // then
     assertThat(entity.getName()).isEqualTo("SCHEDULE_NAME");
   }
@@ -26,8 +26,8 @@ class ScheduleMapperTest {
   void 도메인_엔티티로_변환() {
     // given
     // when
-    val entity = ScheduleMapper.toDomain(FakeScheduleEntity.builder()
-        .id(1L).name("SCHEDULE_NAME").dateTime(LocalDateTime.MIN).build().create());
+    val entity = ScheduleMapper.toDomain(
+        FakeScheduleEntityFactory.create(1L, "SCHEDULE_NAME", LocalDateTime.MIN));
     // then
     assertThat(entity.id())
         .isInstanceOf(ScheduleId.class)

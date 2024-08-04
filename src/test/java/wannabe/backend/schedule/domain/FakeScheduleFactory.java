@@ -11,4 +11,11 @@ public class FakeScheduleFactory {
         .dateTime(new ScheduleDateTime(LocalDateTime.MIN))
         .build();
   }
+
+  public static Schedule create(String name, LocalDateTime dateTime) {
+    return Schedule.builder()
+        .name(new ScheduleName(name))
+        .dateTime(new ScheduleDateTime(dateTime))
+        .build();
+  }
 }
