@@ -2,15 +2,21 @@ package wannabe.backend.init.interactor;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import wannabe.backend.idol.domain.IdolGroup;
+import wannabe.backend.idol.domain.IdolGroupId;
 import wannabe.backend.idol.usecase.AddIdolGroupUseCase;
+import wannabe.backend.idol.usecase.AddIdolMemberUseCase;
 
 @ExtendWith(MockitoExtension.class)
 class InitInteractorTest {
@@ -19,14 +25,19 @@ class InitInteractorTest {
   private InitInteractor interactor;
 
   @Mock
-  private AddIdolGroupUseCase useCase;
+  private AddIdolGroupUseCase addIdolGroupUseCase;
+
+  @Mock
+  private AddIdolMemberUseCase addIdolMemberUseCase;
 
   @Test
-  void 아이돌_그룹_추가() {
+  void 뉴진스_그룹_멤버_추가() {
     // given
+    when(addIdolGroupUseCase.execute(any())).thenReturn(mock(IdolGroupId.class));
     // when
     interactor.execute();
     // then
-    verify(useCase, only()).execute(any());
+    verify(addIdolGroupUseCase, only()).execute(any());
+    verify(addIdolMemberUseCase, times(5)).execute(any());
   }
 }

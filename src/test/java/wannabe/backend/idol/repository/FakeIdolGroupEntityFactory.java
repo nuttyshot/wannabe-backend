@@ -7,4 +7,17 @@ public class FakeIdolGroupEntityFactory {
         .name("MOCK_NAME")
         .build();
   }
+
+  public static IdolGroupEntity create(Long id) {
+    return IdolGroupEntity.builder()
+        .id(id)
+        .name("MOCK_NAME")
+        .build();
+  }
+
+  public static IdolGroupEntity create(String name) {
+    return IdolGroupEntity.builder()
+        .name(name)
+        .build();
+  }
 }
