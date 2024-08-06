@@ -14,7 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -80,7 +79,7 @@ public class ProductEntity extends Audit {
   private IdolMemberEntity idolMember;
 
   @OneToMany(mappedBy = "product")
-  private List<ProductImageEntity> images = new ArrayList<>();
+  private List<ProductImageEntity> images;
 
   public ProductEntity(@NonNull Product product) {
     this.name = product.name();
