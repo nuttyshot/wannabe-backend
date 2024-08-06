@@ -1,4 +1,4 @@
-package wannabe.backend.web.main;
+package wannabe.backend.product.interactor;
 
 import java.time.LocalDate;
 import java.util.List;

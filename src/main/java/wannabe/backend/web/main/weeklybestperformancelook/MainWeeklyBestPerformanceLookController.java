@@ -9,8 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wannabe.backend.web.main.ProductsResponse;
-import wannabe.backend.web.main.ProductsResponse.ProductResponse;
+import wannabe.backend.product.interactor.ProductsResponse;
+import wannabe.backend.product.interactor.ProductsResponse.ProductResponse;
 
 @Tag(name = "메인")
 @RestController
