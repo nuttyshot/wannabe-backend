@@ -1,6 +1,5 @@
 package wannabe.backend.init.interactor;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
@@ -13,10 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wannabe.backend.idol.domain.IdolGroup;
 import wannabe.backend.idol.domain.IdolGroupId;
 import wannabe.backend.idol.usecase.AddIdolGroupUseCase;
 import wannabe.backend.idol.usecase.AddIdolMemberUseCase;
+import wannabe.backend.product.usecase.AddProductUseCase;
+import wannabe.backend.schedule.usecase.AddScheduleUseCase;
 
 @ExtendWith(MockitoExtension.class)
 class InitInteractorTest {
@@ -29,6 +29,12 @@ class InitInteractorTest {
 
   @Mock
   private AddIdolMemberUseCase addIdolMemberUseCase;
+
+  @Mock
+  private AddScheduleUseCase addScheduleUseCase;
+
+  @Mock
+  private AddProductUseCase addProductUseCase;
 
   @Test
   void 뉴진스_그룹_멤버_추가() {
